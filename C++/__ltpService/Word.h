@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <string>
 #include <vector>
-#include "LtpData.h"
+#include "LTPOption.h"
 namespace HIT_IR_LTP{
 	typedef struct
 	{

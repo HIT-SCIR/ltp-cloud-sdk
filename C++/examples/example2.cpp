@@ -8,7 +8,7 @@
 */
 /************************************************************************/
 
-#include "LTPData.h"
+#include "LTPOption.h"
 #include "LTPService.h"
 #include "LTML.h"
 #include "Word.h"  
@@ -18,7 +18,7 @@ int main(){
 	LTPService ls("zhhan@ir.hit.edu.cn");
 
 	LTML ltml;
-	ls.Analyze(ltml, LTPData.ALL,"我们都是赛尔人。");
+	ls.Analyze(ltml, LTPOption.ALL,"我们都是赛尔人。");
 //	cout<<ltml.GetXMLStr()<<endl;
 	int sentNum = ltml.CountSentence();
 	for ( int i = 0; i<sentNum; ++i) { 

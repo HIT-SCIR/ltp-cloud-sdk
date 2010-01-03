@@ -185,7 +185,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\LTPData.cpp"
+				RelativePath=".\LTPOption.cpp"
 				>
 			</File>
 			<File
@@ -235,7 +235,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\LTPData.h"
+				RelativePath=".\LTPOption.h"
 				>
 			</File>
 			<File

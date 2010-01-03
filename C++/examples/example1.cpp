@@ -8,7 +8,7 @@
 */
 /************************************************************************/
 
-#include "LTPData.h"
+#include "LTPOption.h"
 #include "LTPService.h"
 #include "LTML.h"
 #include "Word.h"
@@ -48,7 +48,7 @@ int main9(){
 	//	ltml.AddSentence("我是韩中华。",0);
 	//	ltml.AddSentence("我来自甘南县。", 0);
 
-		ls.Analyze(ltml, LTPData.WSD,ltml);
+		ls.Analyze(ltml, LTPOption.WSD,ltml);
 		cout<<ltml.GetXMLStr()<<endl;
 		int sentNum = ltml.CountSentence();
 		for ( int i = 0; i<sentNum; ++i) { 

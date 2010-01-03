@@ -24,39 +24,39 @@ namespace HIT_IR_LTP{
 
 	bool LTML::HasSent() const
 	{
-		return xml.QueryNote(LTPData.NOTE_SENT);
+		return xml.QueryNote(LTPOption.NOTE_SENT);
 	}
 
 	bool LTML::HasWS() const
 	{
-		return xml.QueryNote(LTPData.NOTE_WORD);
+		return xml.QueryNote(LTPOption.NOTE_WORD);
 	}
 
 	bool LTML::HasPOS() const
 	{
-		return xml.QueryNote(LTPData.NOTE_POS);
+		return xml.QueryNote(LTPOption.NOTE_POS);
 
 	}
 
 	bool LTML::HasNE() const
 	{
-		return xml.QueryNote(LTPData.NOTE_NE);
+		return xml.QueryNote(LTPOption.NOTE_NE);
 
 	}
 
 	bool LTML::HasParser() const
 	{
-		return xml.QueryNote(LTPData.NOTE_PARSER);
+		return xml.QueryNote(LTPOption.NOTE_PARSER);
 	}
 
 	bool LTML::HasWSD() const
 	{
-		return xml.QueryNote(LTPData.NOTE_WSD);
+		return xml.QueryNote(LTPOption.NOTE_WSD);
 	}
 
 	bool LTML::HasSRL() const
 	{
-		return xml.QueryNote(LTPData.NOTE_SRL);
+		return xml.QueryNote(LTPOption.NOTE_SRL);
 	}
 
 	void LTML::SetOver()

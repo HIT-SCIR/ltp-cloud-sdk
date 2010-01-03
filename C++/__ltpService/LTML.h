@@ -2,7 +2,7 @@
 #define _LTML_H_
 
 #include "..\__xml4nlp\XML4NLP.H"
-#include "LtpData.h"
+#include "LTPOption.h"
 #include <fstream>
 
 namespace HIT_IR_LTP{

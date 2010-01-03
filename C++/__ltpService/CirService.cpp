@@ -131,27 +131,27 @@ namespace HIT_IR_LTP{
 	void CirService::SetAnalysisOptions( const std::string& option )
 	{
 		isAllAnalysis = false;
-		if (option == LTPData.WS)
+		if (option == LTPOption.WS)
 		{
 			analysisOptions = "&t=ws";
 			isAllAnalysis = false;
 		}
-		else if (option == LTPData.NE)
+		else if (option == LTPOption.NE)
 		{
 			analysisOptions =  "&t=pos";
 			isAllAnalysis = false;
 		}
-		else if (option == LTPData.PARSER)
+		else if (option == LTPOption.PARSER)
 		{
 			analysisOptions = "&t=dp";
 			isAllAnalysis = false;
 		}
-		else if (option == LTPData.WSD)
+		else if (option == LTPOption.WSD)
 		{
 			analysisOptions = "&t=wsd";
 			isAllAnalysis = false;
 		}
-		else if (option == LTPData.SRL)
+		else if (option == LTPOption.SRL)
 		{
 			analysisOptions = "&t=srl";
 			isAllAnalysis = false;

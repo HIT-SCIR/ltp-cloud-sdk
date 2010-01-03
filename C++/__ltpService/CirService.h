@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
-#include "LtpData.h"
+#include "LTPOption.h"
 
 #ifdef LINUX_OS
  #include <netdb.h>

@@ -8,7 +8,7 @@
 */
 /************************************************************************/
 
-#include "../__ltpService/LTPData.h"
+#include "../__ltpService/LTPOption.h"
 #include "../__ltpService/LTPService.h"
 #include "../__ltpService/LTML.h"
 #include "../__ltpService/Word.h"
@@ -19,7 +19,7 @@ int main11(){
 	LTML ltmlBeg;
 
 	try{
-		ls.Analyze(ltmlBeg, LTPData.WS, "午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想。");		
+		ls.Analyze(ltmlBeg, LTPOption.WS, "午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想。");		
 
 		vector<Word> wordList;
 		ltmlBeg.GetWords(wordList, 0);
@@ -45,7 +45,7 @@ int main11(){
 		LTML ltmlSec;
 		ltmlSec.AddSentence(mergeList, 0);
 		LTML ltmlOut;
-		ls.Analyze(ltmlOut, LTPData.PARSER, ltmlSec);
+		ls.Analyze(ltmlOut, LTPOption.PARSER, ltmlSec);
 
 		//输出合并分词后PARSER结果
 		cout<<"merge and get parser results."<<endl;
