@@ -13,7 +13,7 @@ public class LTPService {
 		super();
 		this.cs = new CirService(authorization);
 	}
-
+ 
 	public LTML analyze(String option, String analyzeString) throws JDOMException, IOException{
 		cs.setAnalysisOptions(option);
 		cs.setXmlOption(false);
