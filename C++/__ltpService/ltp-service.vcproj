@@ -169,10 +169,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\__util\encode.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\examples\example1.cpp"
 				>
 			</File>
@@ -235,18 +231,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\__util\conversion_utf.h"
-				>
-			</File>
-			<File
-				RelativePath="..\__util\decode_gbk.h"
-				>
-			</File>
-			<File
-				RelativePath="..\__util\encode.hpp"
-				>
-			</File>
-			<File
 				RelativePath=".\LTML.h"
 				>
 			</File>
@@ -260,10 +244,6 @@
 			</File>
 			<File
 				RelativePath="..\__util\MyLib.h"
-				>
-			</File>
-			<File
-				RelativePath="..\__util\STL.h"
 				>
 			</File>
 			<File
