@@ -5,7 +5,7 @@ namespace HIT_IR_LTP{
 	{
 	}
 
-	void LTPService::Analyze(LTML& ltml_out, const std::string& option, const std::string& analyzeString)
+	void LTPService::Analyze(const std::string& option, const std::string& analyzeString, LTML& ltml_out)
 	{
 		ls.SetAnalysisOptions(option);
 		ls.SetXmlOption(false);
@@ -17,7 +17,7 @@ namespace HIT_IR_LTP{
 		ltml_out.SetOver();
 	}
 
-	void LTPService::Analyze(LTML& ltml_out, const std::string& option, const LTML& ltml_in)
+	void LTPService::Analyze(const std::string& option, const LTML& ltml_in, LTML& ltml_out)
 	{
 		ls.SetAnalysisOptions(option);
 		ls.SetXmlOption(true);

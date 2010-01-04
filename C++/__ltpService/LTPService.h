@@ -15,8 +15,8 @@ namespace HIT_IR_LTP{
 			:ls(authorization){};
 		~LTPService(void);
 	public:
-		void Analyze(LTML& ltml_out, const std::string& option, const std::string& analyzeString);
-		void Analyze(LTML& ltml_out, const std::string& option, const LTML& ltml_in);
+		void Analyze(const std::string& option, const std::string& analyzeString, LTML& ltml_out);
+		void Analyze(const std::string& option, const LTML& ltml_in, LTML& ltml_out);
 	public:
 		bool SetEncoding(const std::string& encodingType)
 		{

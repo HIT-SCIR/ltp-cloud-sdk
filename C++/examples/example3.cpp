@@ -14,12 +14,12 @@
 #include "../__ltpService/Word.h"
  
 using namespace HIT_IR_LTP;
-int main11(){
+int main(){
 	LTPService ls("zhhan@ir.hit.edu.cn");
 	LTML ltmlBeg;
 
 	try{
-		ls.Analyze(ltmlBeg, LTPOption.WS, "午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想。");		
+		ls.Analyze(LTPOption.WS, "午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想。", ltmlBeg);		
 
 		vector<Word> wordList;
 		ltmlBeg.GetWords(wordList, 0);
@@ -44,8 +44,9 @@ int main11(){
 		}
 		LTML ltmlSec;
 		ltmlSec.AddSentence(mergeList, 0);
+		ltmlSec.SetOver();
 		LTML ltmlOut;
-		ls.Analyze(ltmlOut, LTPOption.PARSER, ltmlSec);
+		ls.Analyze(LTPOption.PARSER, ltmlSec, ltmlOut);
 
 		//输出合并分词后PARSER结果
 		cout<<"merge and get parser results."<<endl;

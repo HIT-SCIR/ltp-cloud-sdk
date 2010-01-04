@@ -14,11 +14,11 @@
 #include "Word.h"  
 
 using namespace HIT_IR_LTP;
-int main(){
+int main2(){
 	LTPService ls("zhhan@ir.hit.edu.cn");
 
 	LTML ltml;
-	ls.Analyze(ltml, LTPOption.ALL,"我们都是赛尔人。");
+	ls.Analyze(LTPOption.ALL,"我们都是赛尔人。", ltml);
 //	cout<<ltml.GetXMLStr()<<endl;
 	int sentNum = ltml.CountSentence();
 	for ( int i = 0; i<sentNum; ++i) { 
