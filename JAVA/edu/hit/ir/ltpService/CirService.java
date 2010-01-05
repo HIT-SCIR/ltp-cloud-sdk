@@ -3,7 +3,6 @@ package edu.hit.ir.ltpService;
 import java.io.IOException;
 import java.util.HashMap;
 
-import edu.hit.ir.webcleitapi.WebCleintAPI;
 
 public class CirService {
 //	private String serverAddress = "http://192.168.3.134";
