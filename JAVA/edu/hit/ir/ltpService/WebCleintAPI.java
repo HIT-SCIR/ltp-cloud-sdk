@@ -12,7 +12,7 @@
  * data:   2009/10/27
  */
 package edu.hit.ir.ltpService;
-
+ 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -296,7 +296,7 @@ public class WebCleintAPI {
 		//测试POST方法返回字符串
 		parMap.put("s", "2009周杰伦在哈尔滨举办个人演唱会，他在演唱会唱了一首《青花瓷》，非常好听。2009周杰伦在哈尔滨举办个人演唱会，他在演唱会唱了一首《青花瓷》，非常好听。");
 	//	System.out.println(WebCleintAPI.doPost("http://192.168.3.134:12345/ltp", parMap, "gb2312"));
-		System.out.println(WebCleintAPI.doPostObj("http://192.168.3.134:12345/ltp", parMap, "gb2312").toString());
+//		System.out.println(WebCleintAPI.doPostObj("http://192.168.3.134:12345/ltp", parMap, "gb2312").toString());
 		
 		//测试GET方法返回字符串且无参数
 //		System.out.println(WebCleintAPI.doGet("http://202.118.250.16:12345/ltp?s=%E6%B5%8B%E8%AF%95", "gb2312"));
