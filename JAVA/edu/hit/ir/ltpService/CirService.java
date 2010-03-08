@@ -81,9 +81,13 @@ public class CirService {
 			analysisOptions = "ws";
 //			System.out.println(analysisOptions);
 		}
-		else if (LTPOption.NE.equals(option))
+		else if (LTPOption.POS.equals(option))
 		{
 			analysisOptions =  "pos";
+		}
+		else if (LTPOption.NE.equals(option))
+		{
+			analysisOptions =  "ner";
 		}
 		else if (LTPOption.PARSER.equals(option))
 		{
