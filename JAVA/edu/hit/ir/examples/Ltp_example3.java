@@ -18,7 +18,7 @@ public class Ltp_example3 {
 		// TODO Auto-generated method stub
 		LTPService ls = new LTPService("zhhan@ir.hit.edu.cn"); 
 		try {
-			LTML ltmlBeg = ls.analyze(LTPOption.WS,"午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想。");
+			LTML ltmlBeg = ls.analyze(LTPOption.WS,"《午夜巴塞罗那》是对爱情的一次诙谐、充满智慧、独具匠心的冥想。");
 //			ltml.printXml();
 			LTML ltmlSec = new LTML();
 
@@ -33,11 +33,12 @@ public class Ltp_example3 {
 				
 //				merge
 				ArrayList<Word> mergeList = new ArrayList<Word>();
+				mergeList.add(wordList.get(0));
 				Word mergeWord = new Word();
-				mergeWord.setWS(wordList.get(0).getWS()+wordList.get(1).getWS());
+				mergeWord.setWS(wordList.get(1).getWS()+wordList.get(2).getWS());
 				mergeList.add(mergeWord);
 				//*
-				for(int j = 2; j < wordList.size(); ++j){
+				for(int j = 3; j < wordList.size(); ++j){
 					Word others = new Word();
 					others.setWS(wordList.get(j).getWS());
 					mergeList.add(others);
