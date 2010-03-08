@@ -34,6 +34,13 @@ public class LTPService {
 		return ltml;
 	}
 	
+	public String getAnalyze(String option, String analyzeString) throws JDOMException, IOException{
+		cs.setAnalysisOptions(option);
+		cs.setXmlOption(false);
+		LTML ltml = new LTML();
+		return cs.Connect(analyzeString);
+	}
+	
 	public void setAnalysisOptions(String op) {
 		cs.setAnalysisOptions(op);
 	}
