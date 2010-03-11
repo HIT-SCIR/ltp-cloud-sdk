@@ -3,11 +3,10 @@ package edu.hit.ir.ltpService;
 import java.io.IOException;
 import java.util.HashMap;
 
-
 public class CirService {
-//	private String serverAddress = "http://192.168.3.134";
-//	private String serverAddress = "http://202.118.250.16";
-	private String serverAddress = "http://ir.hit.edu.cn";
+//	private String serverAddress = "192.168.3.134";
+//	private String serverAddress = "202.118.250.16";
+	private String serverAddress = "ir.hit.edu.cn";
 //	private String uri = "/ltp";
 	private String uri = "/demo/ltp_ws/ltp";
 //	private int ports = 12345;
@@ -26,17 +25,29 @@ public class CirService {
 		this.authorization = authorization;
 	}
 	
+	public boolean isAuthrized() {
+		HashMap<String, String> parMap = new HashMap<String, String>();
+		parMap.put("s", "circwyg");
+		try {
+			WebCleintAPI.setAuthor(authorization);	
+			String str = WebCleintAPI.doPost(serverAddress, ports, uri, parMap, encoding2);
+			if(str.indexOf("401") < 0){
+				return true;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public String Connect(String parameters){
 		HashMap<String, String> parMap = new HashMap<String, String>();
-		parMap.put("a", authorization);
 		if(isEncoding){
 			parMap.put("c", encoding);
 		}
 		if(!isAllAnalysis){
 			parMap.put("t", analysisOptions);
-		}
-		if(dependencyParser){
-			parMap.put("x", "y");
 		}
 		if(isXml){
 			parMap.put("x", "y");
@@ -46,7 +57,8 @@ public class CirService {
 		}
 		String str = null;
 		try {
-			str = WebCleintAPI.doPost(serverAddress + ":" + ports + uri, parMap, encoding2);
+			WebCleintAPI.setAuthor(authorization);	
+			str = WebCleintAPI.doPost(serverAddress, ports, uri, parMap, encoding2);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

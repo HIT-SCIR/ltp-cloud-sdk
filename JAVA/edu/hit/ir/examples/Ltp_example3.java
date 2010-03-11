@@ -16,7 +16,13 @@ public class Ltp_example3 {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		LTPService ls = new LTPService("zhhan@ir.hit.edu.cn"); 
+		LTPService ls = new LTPService("username:password"); 
+		if(!ls.isAuthrized())
+		{
+			System.out.println("Authorization is denied!");
+			System.exit(0);
+		}
+		
 		try {
 			LTML ltmlBeg = ls.analyze(LTPOption.WS,"《午夜巴塞罗那》是对爱情的一次诙谐、充满智慧、独具匠心的冥想。");
 //			ltml.printXml();

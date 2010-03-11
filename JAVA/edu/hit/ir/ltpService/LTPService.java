@@ -56,5 +56,9 @@ public class LTPService {
 	public String getEncoding() {
 		return cs.getEncoding();
 	}
+
+	public boolean isAuthrized() {
+		return cs.isAuthrized();
+	}
 	
 }

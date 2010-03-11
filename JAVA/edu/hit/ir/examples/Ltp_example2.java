@@ -18,7 +18,13 @@ public class Ltp_example2 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		LTPService ls = new LTPService("zhhan@ir.hit.edu.cn"); 
+		LTPService ls = new LTPService("username:password"); 
+		if(!ls.isAuthrized())
+		{
+			System.out.println("Authorization is denied!");
+			System.exit(0);
+		}
+		
 		LTML ltml = new LTML();
 		
 		ArrayList<Word> wordList = new ArrayList<Word>();

@@ -21,20 +21,37 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.http.Header; 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpException;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.ExecutionContext;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.protocol.HttpContext;
 
+import org.apache.http.auth.AuthScheme;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.AuthState;
+import org.apache.http.auth.Credentials;
+import org.apache.http.auth.UsernamePasswordCredentials;
 
 /**
  * Web客户端访问API，只提供GET和POST请求，整个包利用httpcleint4.0
@@ -46,7 +63,21 @@ import org.apache.http.message.BasicNameValuePair;
  */
 public class WebCleintAPI {
 	
-	public static final HttpClient httpclient = new DefaultHttpClient();
+	public static final DefaultHttpClient httpclient = new DefaultHttpClient();
+	private static String usname;
+	private static String passwd;
+	private static boolean author = false;
+	
+	public static void setAuthor(String username, String password) {
+		usname = username;
+		passwd = password;
+		author = true;
+	}
+	public static void setAuthor(String authorization) {
+		usname = authorization.substring(0, authorization.indexOf(":"));
+		passwd = authorization.substring(authorization.indexOf(":") + 1);
+//		System.out.println("username: " +usname + "\npassword: " + passwd);
+	}
 	/**
 	 * 在站点URL上配置参数，形成所要访问的URL
 	 * @param site 站点路径
@@ -259,14 +290,27 @@ public class WebCleintAPI {
 	 * @return 接受到的正文内容，如果出错返回null
 	 * @throws IOException
 	 */
-	public static String doPost(String url, 
+	public static String doPost(String url,  
 						      HashMap<String, String> paraMap,
 						      String charset) throws IOException {
 		UrlEncodedFormEntity entity = genEntity(paraMap, charset);
 		
 		HttpPost httppost = new HttpPost(url);
 		httppost.setEntity(entity);
+		/*
+		if(author) {
+			httpclient.getCredentialsProvider().setCredentials(new AuthScope("202.118.250.16", 54321)
+				, new UsernamePasswordCredentials(usname, passwd));
+		}
+		//*
+		BasicScheme basicAuth = new BasicScheme();
+		BasicHttpContext localcontext = new BasicHttpContext();
+		localcontext.setAttribute("preemptive-auth", basicAuth);
+
+		httpclient.addRequestInterceptor((HttpRequestInterceptor) new PreemptiveAuth(), 0);
 		
+		HttpResponse response = httpclient.execute(httppost, localcontext);
+		// */
 		HttpResponse response = httpclient.execute(httppost);
 		HttpEntity res_entity = response.getEntity();
 		
@@ -282,7 +326,74 @@ public class WebCleintAPI {
 		
 		return retStr;
 	}
-	
+
+	public static String doPost(String host, int port, String uri,  
+						      HashMap<String, String> paraMap,
+						      String charset) throws IOException {
+		UrlEncodedFormEntity entity = genEntity(paraMap, charset);
+		
+		HttpPost httppost = new HttpPost("http://" + host + ":" + port + uri);
+		httppost.setEntity(entity);
+		
+		httpclient.getCredentialsProvider().setCredentials(new AuthScope(host, port)
+			, new UsernamePasswordCredentials(usname, passwd));
+		
+		//*
+		BasicScheme basicAuth = new BasicScheme();
+		BasicHttpContext localcontext = new BasicHttpContext();
+		localcontext.setAttribute("preemptive-auth", basicAuth);
+
+		httpclient.addRequestInterceptor((HttpRequestInterceptor) new PreemptiveAuth(), 0);
+		
+		HttpResponse response = httpclient.execute(httppost, localcontext);
+		// */
+//		HttpResponse response = httpclient.execute(httppost);
+		HttpEntity res_entity = response.getEntity();
+		
+		String retStr = "";
+		if (res_entity != null) {
+		    InputStream instream = res_entity.getContent();
+		    int size;
+		    byte[] tmp = new byte[2048];
+		    while ((size = instream.read(tmp)) != -1)
+		    	retStr += new String(tmp, 0, size, charset);
+		    res_entity.consumeContent();
+		}
+		
+		return retStr;
+	}
+	static class PreemptiveAuth implements HttpRequestInterceptor {  		  
+		        public void process(  
+		                final HttpRequest request,   
+		                final HttpContext context) throws HttpException, IOException {  
+		              
+		            AuthState authState = (AuthState) context.getAttribute(  
+		                    ClientContext.TARGET_AUTH_STATE);  
+		              
+		            // If no auth scheme avaialble yet, try to initialize it preemptively  
+		            if (authState.getAuthScheme() == null) {  
+		                AuthScheme authScheme = (AuthScheme) context.getAttribute(  
+		                        "preemptive-auth");  
+		                CredentialsProvider credsProvider = (CredentialsProvider) context.getAttribute(  
+		                        ClientContext.CREDS_PROVIDER);  
+		                HttpHost targetHost = (HttpHost) context.getAttribute(  
+		                        ExecutionContext.HTTP_TARGET_HOST);  
+		                if (authScheme != null) {  
+		                    Credentials creds = credsProvider.getCredentials(  
+		                            new AuthScope(  
+		                                    targetHost.getHostName(),   
+		                                    targetHost.getPort()));  
+		                    if (creds == null) {  
+		                        throw new HttpException("No credentials for preemptive authentication");  
+		                    }  
+		                    authState.setAuthScheme(authScheme);  
+		                    authState.setCredentials(creds);  
+		                }  
+		            }  
+		              
+		        }  
+		          
+		    }  
 	public static void main(String[] argv) throws ClientProtocolException, IOException {
 //		System.out.println(CleitTest.doGet("http://www.baidu.com/s?wd=%C1%F5%C1%FA"));;
 		HashMap<String, String> parMap = new HashMap<String, String>();

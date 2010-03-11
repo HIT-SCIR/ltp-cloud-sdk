@@ -10,7 +10,12 @@ import edu.hit.ir.ltpService.Word;
 public class Ltp_example1 {
 	public static void main(String[] args) {
 
-		LTPService ls = new LTPService("zhhan@ir.hit.edu.cn"); 
+		LTPService ls = new LTPService("username:password"); 
+		if(!ls.isAuthrized())
+		{
+			System.out.println("Authorization is denied!");
+			System.exit(0);
+		}
 		
 		try {
 			LTML ltml = ls.analyze(LTPOption.ALL,"我们都是赛尔人。");
