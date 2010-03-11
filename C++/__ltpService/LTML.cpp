@@ -68,4 +68,15 @@ namespace HIT_IR_LTP{
 	{
 		xml.ClearDOM();
 	}
+
+	void LTML::InitNull()
+	{
+		//xml.InitXmlStructure();
+		std::string ltmlNull;
+		ltmlNull.append("<?xml version=\"1.0\" encoding=\"gbk\" ?>\
+			<xml4nlp><note sent=\"n\" word=\"n\" pos=\"n\" ne=\"n\" parser=\"n\" wsd=\"n\" srl=\"n\" />\
+				<doc></doc></xml4nlp>");
+		//ltmlNull.append();
+		xml.LoadXMLFromString(ltmlNull);
+	}
 }

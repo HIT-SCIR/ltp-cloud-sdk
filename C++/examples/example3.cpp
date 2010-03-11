@@ -14,8 +14,13 @@
 #include "../__ltpService/Word.h"
  
 using namespace HIT_IR_LTP;
-int main(){
-	LTPService ls("zhhan@ir.hit.edu.cn");
+int main_3(){
+	LTPService ls("username:password");
+	if (!ls.isAuthorized())
+	{
+		cerr<<"Authorization is denied!"<<endl;
+		exit(EXIT_FAILURE);
+	}
 	LTML ltmlBeg;
 
 	try{
@@ -46,7 +51,7 @@ int main(){
 		ltmlSec.AddSentence(mergeList, 0);
 		ltmlSec.SetOver();
 		LTML ltmlOut;
-		ls.Analyze(LTPOption.PARSER, ltmlSec, ltmlOut);
+		ls.Analyze(LTPOption.PARSER, ltmlSec, ltmlOut);	
 
 		//输出合并分词后PARSER结果
 		cout<<"merge and get parser results."<<endl;

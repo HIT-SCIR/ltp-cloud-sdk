@@ -14,8 +14,13 @@
 #include "Word.h"  
 
 using namespace HIT_IR_LTP;
-int main2(){
-	LTPService ls("zhhan@ir.hit.edu.cn");
+int main_2(){
+	LTPService ls("username:password");
+	if (!ls.isAuthorized())
+	{
+		cerr<<"Authorization is denied!"<<endl;
+		exit(EXIT_FAILURE);
+	}
 
 	LTML ltml;
 	ls.Analyze(LTPOption.ALL,"我们都是赛尔人。", ltml);

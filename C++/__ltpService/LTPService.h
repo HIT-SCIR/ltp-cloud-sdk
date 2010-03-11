@@ -18,6 +18,10 @@ namespace HIT_IR_LTP{
 		void Analyze(const std::string& option, const std::string& analyzeString, LTML& ltml_out);
 		void Analyze(const std::string& option, const LTML& ltml_in, LTML& ltml_out);
 	public:
+		bool isAuthorized()
+		{
+			return ls.isAuthorized();
+		}
 		bool SetEncoding(const std::string& encodingType)
 		{
 			return ls.SetEncoding(encodingType);

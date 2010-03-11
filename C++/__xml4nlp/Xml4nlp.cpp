@@ -160,6 +160,12 @@ namespace HIT_IR_LTP{
 
 	int XML4NLP::LoadXMLFromString( const char* str )
 	{
+		//add by zhhan 2010-1-24
+		if (str == NULL)
+		{
+			sentenceNumber = 0;
+			paragraphNumber = 0;
+		}
 		ClearDOM();
 		m_tiXmlDoc.Parse(str);
 		if ( m_tiXmlDoc.Error() )
@@ -235,6 +241,14 @@ namespace HIT_IR_LTP{
 	*/
 	int XML4NLP::CountSentenceInDocument() const
 	{
+		/*
+		//add by zhhan
+		printf("here \n");
+		if (m_document_t.documentPtr == NULL)
+		{
+			return 0;
+		}
+		//*/
 		int stnsNumInDoc = 0;
 		int paragraphNum = m_document_t.vecParagraph_t.size();
 		for (int i = 0; i < paragraphNum; ++i)

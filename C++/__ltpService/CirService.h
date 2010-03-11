@@ -8,6 +8,7 @@
 #include <string>
 #include <stdlib.h>
 #include "LTPOption.h"
+#include "../__util/Base64Encoder.h"
 
 #ifdef LINUX_OS
  #include <netdb.h>
@@ -34,21 +35,24 @@ namespace HIT_IR_LTP{
 		//注意初初始化
 		CirService(const std::string& au)
 			:serverAddress("ir.hit.edu.cn"), uris("/demo/ltp_ws/ltp"),ports(80),param()
-	//    :serverAddress("202.118.250.16"),uris("/ltp"),ports(12345),param()
+	//    :serverAddress("202.118.250.16"),uris("/ltp"),ports(54321),param()
 	//    :serverAddress("192.168.3.134"),uris("/ltp"),ports(12345),param()
 	//    :serverAddress("www.hit.edu.cn"),uris("/index.htm"),ports(80),param()
 		,encoding("c="),analysisOptions("t="),isEncoding(false),isAllAnalysis(true)
-		,authorization(au), isXml(false)
-		{
+		, authorization("Authorization: Basic " + Base64Encoder::encodeStr(au)), isXml(false)
+		{			
 			#ifdef WIN_OS
 				WSAStartup (0x0101, &WsaData);
 			#endif
+			authorization += "\r\n\r\n";
 		};
 		~CirService(){
 			#ifdef WIN_OS
 				WSACleanup();
 			#endif
 		};
+
+		bool isAuthorized();
 
 		int Analyze(const std::string& parameters, std::string& message);
 	//    void setS();                //设置向服务器端发送的语句

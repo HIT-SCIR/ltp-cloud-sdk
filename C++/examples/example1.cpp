@@ -14,16 +14,20 @@
 #include "Word.h"
  
 using namespace HIT_IR_LTP;
-int main9(){
-	LTPService ls("zhhan@ir.hit.edu.cn");
+int main_1(){
+	LTPService ls("username:password");
+	if (!ls.isAuthorized())
+	{
+		cerr<<"Authorization is denied!"<<endl;
+		exit(EXIT_FAILURE);
+	}
 
 	LTML ltml;
-	//*
+
 	vector<Word> wordList;
 	Word w1;
 	w1.SetWS("我");
 	w1.SetPOS("r");
-//		w1.SetNE("nr");
 	wordList.push_back(w1);
 
 	Word w;
@@ -41,21 +45,15 @@ int main9(){
 
 	try{
 
-	//	ltml.SetParagraphNumber(2);
 		ltml.AddSentence(wordList, 0);
-		//*/
-		//ltml.SetParagraphNumber(2);
-	//	ltml.AddSentence("我是韩中华。",0);
-	//	ltml.AddSentence("我来自甘南县。", 0);
 
-		ls.Analyze(LTPOption.WSD,ltml, ltml);
+		ls.Analyze(LTPOption.WSD, ltml, ltml);
 		cout<<ltml.GetXMLStr()<<endl;
 		int sentNum = ltml.CountSentence();
 		for ( int i = 0; i<sentNum; ++i) { 
 			string sentCont;
 			ltml.GetSentenceContent(sentCont, i);
 			cout<< sentCont <<endl;
-			//		int wordNum = ltml.CountWordInSentence(i);
 			vector<Word> wordList;
 			ltml.GetWords(wordList, i);
 			for( vector<Word>::iterator iter = wordList.begin(); iter!= wordList.end(); ++iter ){

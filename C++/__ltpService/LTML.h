@@ -18,6 +18,7 @@ namespace HIT_IR_LTP{
 		bool SetEncoding(const std::string& encodeType);
 		void SetOver();
 		std::string GetXMLStr() const;
+		void InitNull();	//initial a null xml;
 
 	public:
 		bool HasSent() const;

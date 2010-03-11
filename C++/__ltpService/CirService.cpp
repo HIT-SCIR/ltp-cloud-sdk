@@ -3,11 +3,19 @@
 namespace HIT_IR_LTP{
 	int CirService::Analyze( const std::string& parameters, std::string& message )
 	{
+		/*
 		if(!authorization.empty()){
-			param = "a="+authorization;
+			authorization = "Authorization: Basic " + Base64Encoder::encodeStr(authorization);
+			authorization += "\r\n\r\n";
+		}
+		else
+			return 401;
+			// */
+		if(!parameters.empty()){
+			param = "s=" + parameters;
 		}
 		if(isXml){
-			param = "&x=y";
+			param += "&x=y";
 		}
 		if(isEncoding){
 			param += "&c=" + encoding;
@@ -15,12 +23,9 @@ namespace HIT_IR_LTP{
 		if(!isAllAnalysis){
 			param += analysisOptions;
 		}
-		if(!parameters.empty()){
-			param += "&s=" + parameters;
-		}
 
 		sockaddr_in sin;
-		int sock = socket (AF_INET, SOCK_STREAM, 0);
+		int sock = socket (AF_INET, SOCK_STREAM, 0); 
 		if (sock == -1) {
 			return 404;     //not found;
 		}
@@ -95,7 +100,10 @@ namespace HIT_IR_LTP{
 			}
 			message += c;
 		}
-	//	std::cout<<message<<std::endl;
+		if (message.find("401") != std::string::npos)
+		{
+			std::cout<<message<<std::endl;
+		}
 		message ="";
 		if(bodies){
 			char p[1024];
@@ -179,7 +187,9 @@ namespace HIT_IR_LTP{
 		send_str = "Accept-Language: zh-cn\r\n";
 		send_str +="Accept-Encoding: gzip, deflate\r\n";
 		send_str +="Host: " + serverAddress + "\r\n";
-		send_str +="Content-Type: application/x-www-form-urlencoded\r\n\r\n";
+//		send_str +="Content-Type: application/x-www-form-urlencoded\r\n\r\n";
+		send_str +="Content-Type: application/x-www-form-urlencoded\r\n";
+		send_str += authorization; //"Authorization: Basic ZGVtbzpkZW1v\r\n\r\n";
 		send_str += param + "\r\n";
 		send(sock,send_str.c_str(),send_str.length(),0);
 	//    std::cout<<send_str;
@@ -200,5 +210,105 @@ namespace HIT_IR_LTP{
 			return "utf-8";
 		}
 		return encoding;
+	}
+
+	bool CirService::isAuthorized()
+	{
+		/*
+		if(!authorization.empty()){
+			authorization = "Authorization: Basic " + Base64Encoder::encodeStr(authorization);
+			authorization += "\r\n\r\n";
+		}
+		// */
+		sockaddr_in sin;
+		int sock = socket (AF_INET, SOCK_STREAM, 0);
+		if (sock == -1) {
+			return false;     //not found;
+		}
+		sin.sin_family = AF_INET;
+		sin.sin_port = htons( (unsigned short)ports);
+
+		struct hostent * host_addr = gethostbyname(serverAddress.c_str());
+		if(host_addr==NULL) {
+			return  false;      //bad request;
+		}
+		sin.sin_addr.s_addr = *((int*)*host_addr->h_addr_list) ;
+
+		if( connect (sock,(const struct sockaddr *)&sin, sizeof(sockaddr_in) ) == -1 ) {
+			//       std::cout<<"connect failed"<<std::endl;
+			return false;
+		}
+
+		SendMessage(sock, uris, "s=ltpcwyg", serverAddress);
+
+		int states;
+		int curState = 0;
+		bool header = true;
+		std::string message = "";
+
+		while(header){
+			char c;
+			states = recv(sock, &c, 1, 0);
+			if(states<0){
+				header = false;
+			}
+			switch(curState){
+				case 0:
+					if (c == '\r')
+					{
+						++curState;
+					}
+					break;
+				case 1:
+					if(c == '\n')
+					{
+						++curState;
+					}
+					else
+					{
+						curState = 0;
+					}
+					break;
+				case 2:
+					if (c == '\r')
+					{
+						++curState;
+					}
+					else
+					{
+						curState = 0;
+					}
+					break;
+				case 3:
+					if(c == '\n')
+					{
+						++curState;
+						header = false;
+						if(message.find("200") != std::string::npos){
+							return true;
+						}
+						else if (message.find("401") != std::string::npos)
+						{
+							header = false;
+							return false;
+						}
+
+					}
+					else
+					{
+						curState = 0;
+					}
+					break;
+			}
+			message += c;
+		}
+		if (message.find("401") != std::string::npos)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 }

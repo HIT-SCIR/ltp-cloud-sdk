@@ -84,10 +84,24 @@ namespace HIT_IR_LTP{
 
 		// some counting functions
 #pragma region counts_zhhan
-		int CountParagraphInDocument() const { return m_document_t.vecParagraph_t.size(); }
+		int CountParagraphInDocument() const 
+		{ 
+			/*
+			//add by zhhan
+			if (m_document_t.documentPtr == NULL)
+			{
+				return 0;
+			}
+			//*/
+			return m_document_t.vecParagraph_t.size(); 
+		}
 
 		int CountSentenceInParagraph(int paragraphIdx) const
 		{
+			if (m_document_t.documentPtr == NULL)
+			{
+				return 0;
+			}
 			if ( 0 != CheckRange(paragraphIdx) ) return 0;
 			return m_document_t.vecParagraph_t[paragraphIdx].vecSentence_t.size();
 		}
