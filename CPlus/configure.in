@@ -1,0 +1,38 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.64])
+AC_INIT(ltp_service, 1.0, zhhan@ir.hit.edu.cn)
+##AC_CONFIG_SRCDIR([GraphCase.h])
+##AM_CONFIG_HEADERS(config.h)
+AM_INIT_AUTOMAKE(ltp_service, 1.0)
+AC_PROG_LIBTOOL
+
+# Checks for programs.
+AC_PROG_CXX
+AC_PROG_CC
+
+# Checks for libraries.
+# FIXME: Replace `main' with a function in `-lcppunit':
+# AC_CHECK_LIB([cppunit], [main])
+# FIXME: Replace `main' with a function in `-ldl':
+# AC_CHECK_LIB([dl], [main])
+
+# Checks for header files.
+## AC_HEADER_STDC
+## AC_CHECK_HEADERS([])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_STDBOOL
+AC_TYPE_SIZE_T
+
+# Checks for library functions.
+
+AC_CONFIG_FILES([Makefile
+		__xml4nlp/Makefile
+		__ltpService/Makefile
+		__util/Makefile
+		examples/Makefile
+	])
+AC_OUTPUT
+
