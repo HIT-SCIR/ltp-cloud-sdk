@@ -39,7 +39,7 @@ namespace ltp_service
             }
             /*
             LTPService ltpService = new LTPService();
-            ltpService.Authorize("cir:lovehitcir");
+            ltpService.Authorize("username:password");
             if (ltpService.IsAuthorized())
             {
                 LTML temp = ltpService.Analyze(LTPOption.WS, "午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想");
@@ -69,7 +69,7 @@ namespace ltp_service
         static void Example1()
         {
             LTPService ltpService = new LTPService();
-            ltpService.Authorize("cir:lovehitcir");
+            ltpService.Authorize("username:password");
             if (!ltpService.IsAuthorized())
             {
                 return;
@@ -159,7 +159,7 @@ namespace ltp_service
         static void TestSentence(string strOption, string strSentFile, string strXMLFile)
         {
             LTPService ltpService = new LTPService();
-            ltpService.Authorize("cir:lovehitcir");
+            ltpService.Authorize("username:password");
             if (!ltpService.IsAuthorized())
             {
                 return;
@@ -215,7 +215,7 @@ namespace ltp_service
         static void TestXmlFile(string strOption, string strXMLFileIn, string strXMLFileOut)
         {
             LTPService ltpService = new LTPService();
-            ltpService.Authorize("cir:lovehitcir");
+            ltpService.Authorize("username:password");
             if (!ltpService.IsAuthorized())
             {
                 return;
@@ -258,7 +258,7 @@ namespace ltp_service
         static void TestMergeXmlFile(string strOption, string strXMLlFile_Main, string strXMLlFile_Merge, string strXMLlFile_Out)
         {
             LTPService ltpService = new LTPService();
-            ltpService.Authorize("cir:lovehitcir");
+            ltpService.Authorize("username:password");
             if (!ltpService.IsAuthorized())
             {
                 return;
@@ -313,7 +313,7 @@ namespace ltp_service
         static void Example3()
         {
             LTPService ltpService = new LTPService();
-            ltpService.Authorize("cir:lovehitcir");
+            ltpService.Authorize("username:password");
             if (!ltpService.IsAuthorized())
             {
                 return;
