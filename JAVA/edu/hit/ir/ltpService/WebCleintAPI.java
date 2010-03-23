@@ -348,6 +348,10 @@ public class WebCleintAPI {
 		HttpResponse response = httpclient.execute(httppost, localcontext);
 		// */
 //		HttpResponse response = httpclient.execute(httppost);
+		
+		if( response.getStatusLine().toString().indexOf("401") >= 0) {
+			throw new RuntimeException("Authorization is denied!");
+		}
 		HttpEntity res_entity = response.getEntity();
 		
 		String retStr = "";

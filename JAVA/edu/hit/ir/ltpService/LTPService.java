@@ -18,8 +18,10 @@ public class LTPService {
 		cs.setAnalysisOptions(option);
 		cs.setXmlOption(false);
 		LTML ltml = new LTML();
-		ltml.setEncoding(cs.getEncoding());
-		ltml.build(cs.Connect(analyzeString));
+//		ltml.setEncoding(cs.getEncoding());
+		String str = cs.Connect(analyzeString);
+		System.out.println("str here:\n" + str);
+		ltml.build(str);
 		ltml.setOver();
 		return ltml;
 	}
@@ -28,7 +30,7 @@ public class LTPService {
 		cs.setAnalysisOptions(option);
 		cs.setXmlOption(true);
 		LTML ltml = new LTML();
-		ltml.setEncoding(cs.getEncoding());
+//		ltml.setEncoding(cs.getEncoding());
 		ltml.build(cs.Connect(ltmlIn.getXMLStr()));
 		ltml.setOver();
 		return ltml;
