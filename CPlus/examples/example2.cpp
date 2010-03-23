@@ -16,14 +16,12 @@
 using namespace HIT_IR_LTP;
 int main_2(){
 	LTPService ls("username:password");
-	if (!ls.IsAuthorized())
+	LTML ltml;
+	if (!ls.Analyze(LTPOption.ALL,"我们都是赛尔人。", ltml))
 	{
 		cerr<<"Authorization is denied!"<<endl;
 		exit(EXIT_FAILURE);
 	}
-
-	LTML ltml;
-	ls.Analyze(LTPOption.ALL,"我们都是赛尔人。", ltml);
 //	cout<<ltml.GetXMLStr()<<endl;
 	int sentNum = ltml.CountSentence();
 	for ( int i = 0; i<sentNum; ++i) { 

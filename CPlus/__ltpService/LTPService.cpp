@@ -5,8 +5,9 @@ namespace HIT_IR_LTP{
 	{
 	}
 
-	void LTPService::Analyze(const std::string& option, const std::string& analyzeString, LTML& ltml_out)
+	bool LTPService::Analyze(const std::string& option, const std::string& analyzeString, LTML& ltml_out)
 	{
+		int flag = -1;
 		ls.SetAnalysisOptions(option);
 		ls.SetXmlOption(false);
 		std::string resultStr;
@@ -17,24 +18,35 @@ namespace HIT_IR_LTP{
 		else
 		{
 			//		printf("analyzeString: \n%s\n", analyzeString.c_str());
-			ls.Analyze(analyzeString, resultStr);
+			flag = ls.Analyze(analyzeString, resultStr);
 			//		printf("result: \n%s\n", resultStr.c_str());
 			ltml_out.ClearDOM();
 			ltml_out.SetEncoding(ls.GetEncoding());
 			ltml_out.LoadLtml(resultStr);
 			ltml_out.SetOver();
 		}
+		if (flag==0)
+		{
+			return true;
+		}
+		return false;
 	}
 
-	void LTPService::Analyze(const std::string& option, const LTML& ltml_in, LTML& ltml_out)
+	bool LTPService::Analyze(const std::string& option, const LTML& ltml_in, LTML& ltml_out)
 	{
+		int flag = -1;
 		ls.SetAnalysisOptions(option);
 		ls.SetXmlOption(true);
 		std::string resultStr;
-		ls.Analyze(ltml_in.GetXMLStr(), resultStr);
+		flag = ls.Analyze(ltml_in.GetXMLStr(), resultStr);
 		ltml_out.ClearDOM();
 		ltml_out.SetEncoding(ls.GetEncoding());
 		ltml_out.LoadLtml(resultStr);
 		ltml_out.SetOver();
+		if (flag==0)
+		{
+			return true;
+		}
+		return false;
 	}
 }

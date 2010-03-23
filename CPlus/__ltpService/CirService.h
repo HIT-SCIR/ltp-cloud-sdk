@@ -1,6 +1,6 @@
 #ifndef _CIRSERVICE_H_
 #define _CIRSERVICE_H_
- #define LINUX_OS
+// #define LINUX_OS
 // #define WIN_OS
 
 //For commn
@@ -54,7 +54,7 @@ namespace HIT_IR_LTP{
 			#endif
 		};
 
-		bool isAuthorized();
+		bool IsAuthorized();
 
 		int Analyze(const std::string& parameters, std::string& message);
 	//    void setS();                //设置向服务器端发送的语句

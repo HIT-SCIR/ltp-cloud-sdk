@@ -16,12 +16,6 @@
 using namespace HIT_IR_LTP;
 int main_1(){
 	LTPService ls("username:password");
-	if (!ls.IsAuthorized())
-	{
-		cerr<<"Authorization is denied!"<<endl;
-		exit(EXIT_FAILURE);
-	}
-
 	LTML ltml;
 
 	vector<Word> wordList;
@@ -47,8 +41,11 @@ int main_1(){
 
 		ltml.AddSentence(wordList, 0);
 
-		ls.Analyze(LTPOption.WSD, ltml, ltml);
-		cout<<ltml.GetXMLStr()<<endl;
+		if(!ls.Analyze(LTPOption.WSD, ltml, ltml)) {
+			cerr<<"Authorization is denied!"<<endl;
+			exit(EXIT_FAILURE);
+		}
+//		cout<<ltml.GetXMLStr()<<endl;
 		int sentNum = ltml.CountSentence();
 		for ( int i = 0; i<sentNum; ++i) { 
 			string sentCont;

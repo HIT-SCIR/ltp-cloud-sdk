@@ -102,7 +102,8 @@ namespace HIT_IR_LTP{
 		}
 		if (message.find("401") != std::string::npos)
 		{
-			std::cout<<message<<std::endl;
+			//std::cout<<message<<std::endl;
+			return 401;
 		}
 		message ="";
 		if(bodies){

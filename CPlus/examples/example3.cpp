@@ -16,15 +16,13 @@
 using namespace HIT_IR_LTP;
 int main_3(){
 	LTPService ls("username:password");
-	if (!ls.IsAuthorized())
-	{
-		cerr<<"Authorization is denied!"<<endl;
-		exit(EXIT_FAILURE);
-	}
 	LTML ltmlBeg;
 
 	try{
-		ls.Analyze(LTPOption.WS, "午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想。", ltmlBeg);		
+		if(!ls.Analyze(LTPOption.WS, "午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想。", ltmlBeg)) {
+			cerr<<"Authorization is denied!"<<endl;
+			exit(EXIT_FAILURE);
+		}
 
 		vector<Word> wordList;
 		ltmlBeg.GetWords(wordList, 0);
