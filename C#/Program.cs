@@ -14,152 +14,39 @@ namespace ltp_service
     {
         static void Main(string[] args)
         {
-            if (args.Length < 1)
-            {
-                Usage();
-                return;
-            }
-
-            if (args[0].Equals("-sentence") && args.Length == 4)
-            {
-                TestSentence(args[1], args[2], args[3]);               
-            }
-            else if (args[0].Equals("-xml") && args.Length == 4)
-            {
-                TestXmlFile(args[1], args[2], args[3]);   
-            }
-            else if (args[0].Equals("-xmlmerge") && args.Length == 5)
-            {
-                TestMergeXmlFile(args[1], args[1], args[2], args[4]); 
-            }
-            else
-            {
-                Usage();
-                return;
-            }
-            /*
-            LTPService ltpService = new LTPService();
-            ltpService.Authorize("username:password");
-            if (ltpService.IsAuthorized())
-            {
-                LTML temp = ltpService.Analyze(LTPOption.WS, "午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想");
-                temp.ListSentences[0].WordList[2].SetWSD("aa", "bb");
-                temp.SaveDom(@"D:\hit\wanxiang\ltp-service\temp1.xml");
-                
-
-                LTML temp_next = ltpService.Analyze(LTPOption.POS, temp);
-                temp_next.SaveDom(@"D:\hit\wanxiang\ltp-service\temp2.xml");
-
-                temp_next.AddSentence(temp_next.ListSentences[0].WordList, 0);
-                temp_next.SaveDom(@"D:\hit\wanxiang\ltp-service\temp3.xml");
-                temp_next.AddSentence(temp.ListSentences[0].WordList, 0);
-                temp_next.SaveDom(@"D:\hit\wanxiang\ltp-service\temp4.xml");
-                temp_next.AddSentence(temp_next.ListSentences[0].WordList, 10);
-                temp_next.SaveDom(@"D:\hit\wanxiang\ltp-service\temp5.xml");
-            }
-            
-            Example1();
-            Example2();
-            Example3();
-             */
-
-            Console.WriteLine("Succeeded!");
-        }
-
-        static void Example1()
-        {
-            LTPService ltpService = new LTPService();
-            ltpService.Authorize("username:password");
-            if (!ltpService.IsAuthorized())
-            {
-                return;
-            }
-
-            LTML ltml = new LTML();
-
-            List<Word> wordList = new List<Word>();
-            Word w1 = new Word();
-            w1.SetWS("我");
-            w1.SetPOS("r");
-            wordList.Add(w1);
-
-            Word w2 = new Word();
-            w2.SetWS("爱");
-            w2.SetPOS("v");
-            wordList.Add(w2);
-
-            Word w3 = new Word();
-            w3.SetWS("北京");
-            w3.SetPOS("ns");
-            wordList.Add(w3);
-
-            w3 = new Word();
-            w3.SetWS("天安门");
-            w3.SetPOS("ns");
-            wordList.Add(w3);
-
             try
             {
-                ltml.AddSentence(wordList, 0);
-                ltml.SaveDom(@"D:\hit\wanxiang\ltp-service\example1-ltml.xml");
-                LTML ltmlOut = ltpService.Analyze(LTPOption.ALL, ltml);
-                ltmlOut.SaveDom(@"D:\hit\wanxiang\ltp-service\example1-ltmOutl.xml");
-                Console.WriteLine(ltmlOut.GetXMLStr());
-                int sentNum = ltmlOut.CountSentence();
-                for (int i = 0; i < sentNum; ++i)
+                if (args.Length == 5 && args[0].Equals("-sentence"))
                 {
-                    string sentCont;
-                    sentCont = ltmlOut.GetSentenceContent(i);
-                    Console.WriteLine(sentCont);
-                    List<Word> wordLista = ltmlOut.GetWords(i);
-                    foreach (Word curWord in wordLista)
-                    {
-                        if (ltmlOut.HasWS())
-                        {
-                            Console.Write("{0}\t{1}", curWord.GetWS(), curWord.GetID());
-                        }
-                        if (ltmlOut.HasPOS())
-                        {
-                            Console.Write("\t" + curWord.GetPOS());
-                        }
-                        if (ltmlOut.HasNE())
-                        {
-                            Console.Write("\t" + curWord.GetNE());
-                        }
-                        if (ltmlOut.HasParser())
-                        {
-                            Console.Write("\t" + curWord.GetParserParent() + "\t" + curWord.GetParserRelation());
-                        }
-                        if (ltmlOut.HasWSD())
-                        {
-                            Console.Write("\t" + curWord.GetWSD() + "\t" + curWord.GetWSDExplanation());
-                        }
-                        Console.WriteLine();
-
-                        if (curWord.IsPredicate())
-                        {
-                            List<SRL> srls = curWord.GetSRLs();
-                            Console.WriteLine(srls.Count);
-                            foreach (SRL srl in srls)
-                            {
-                                Console.WriteLine(srl.ToString());
-                            }
-
-                        }
-
-                    }
+                    TestSentence(args[1], args[2], args[3], args[4]);
+                }
+                else if (args.Length == 5 && args[0].Equals("-xml"))
+                {
+                    TestXmlFile(args[1], args[2], args[3], args[4]);
+                }
+                else if (args.Length == 6 && args[0].Equals("-xmlmerge"))
+                {
+                    TestMergeXmlFile(args[1], args[2], args[3], args[4], args[5]);
+                }
+                else
+                {
+                    Usage();
+                    return;
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+
+            Console.WriteLine("Succeeded!");
         }
 
-        static void TestSentence(string strOption, string strSentFile, string strXMLFile)
+
+        static void TestSentence(string strAuthorize, string strOption, string strSentFile, string strXMLFile)
         {
             LTPService ltpService = new LTPService();
-            ltpService.Authorize("username:password");
+            ltpService.Authorize(strAuthorize);
             if (!ltpService.IsAuthorized())
             {
                 return;
@@ -212,10 +99,10 @@ namespace ltp_service
             ltmlOut.SaveDom(strXMLFile);
         }
 
-        static void TestXmlFile(string strOption, string strXMLFileIn, string strXMLFileOut)
+        static void TestXmlFile(string strAuthorize, string strOption, string strXMLFileIn, string strXMLFileOut)
         {
             LTPService ltpService = new LTPService();
-            ltpService.Authorize("username:password");
+            ltpService.Authorize(strAuthorize);
             if (!ltpService.IsAuthorized())
             {
                 return;
@@ -255,10 +142,10 @@ namespace ltp_service
             }           
         }
 
-        static void TestMergeXmlFile(string strOption, string strXMLlFile_Main, string strXMLlFile_Merge, string strXMLlFile_Out)
+        static void TestMergeXmlFile(string strAuthorize, string strOption, string strXMLlFile_Main, string strXMLlFile_Merge, string strXMLlFile_Out)
         {
             LTPService ltpService = new LTPService();
-            ltpService.Authorize("username:password");
+            ltpService.Authorize(strAuthorize);
             if (!ltpService.IsAuthorized())
             {
                 return;
@@ -310,69 +197,15 @@ namespace ltp_service
                 }
             }
         }
-        static void Example3()
-        {
-            LTPService ltpService = new LTPService();
-            ltpService.Authorize("username:password");
-            if (!ltpService.IsAuthorized())
-            {
-                return;
-            }
-            LTML ltmlBeg = new LTML();
-	        try
-            {
-		        ltmlBeg = ltpService.Analyze(LTPOption.WS, "午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想。");		
-		        List<Word> wordList = ltmlBeg.GetWords(0);
-		        //输出分词结果
-		        foreach(Word curWord in wordList)
-		        {
-			        Console.WriteLine(curWord.GetID() + "\t" + curWord.GetWS());
-		        }
-		        Console.WriteLine();
-
-		        //将“午夜”与“巴赛罗那”合并，其它的词不变
-		        List<Word> mergeList = new List<Word>();
-		        Word mergeWord = new Word();
-		        mergeWord.SetWS(wordList[0].GetWS() + wordList[1].GetWS());
-		        mergeList.Add(mergeWord);
-
-		        for (int i = 2; i < wordList.Count; i++)
-		        {
-			        Word others = new Word();
-			        others.SetWS(wordList[i].GetWS());
-			        mergeList.Add(others);
-		        }
-
-		        LTML ltmlSec = new LTML();
-		        ltmlSec.AddSentence(mergeList, 0);
-		        ltmlSec.SetOver();
-                LTML ltmlOut = ltpService.Analyze(LTPOption.PARSER, ltmlSec);
-
-		        //输出合并分词后PARSER结果
-		        Console.WriteLine("merge and get parser results.");
-		        List<Word> outList = ltmlOut.GetWords(0);		        
-		        foreach(Word curWord in outList)
-		        {
-			        Console.WriteLine(curWord.GetID() + "\t" + curWord.GetWS() + "\t" + curWord.GetPOS() + "\t" + curWord.GetParserParent() + "\t" + curWord.GetParserRelation());				
-		        }
-		        Console.WriteLine();
-                ltmlBeg.SaveDom(@"D:\hit\wanxiang\ltp-service\example3-ltmlBeg.xml");
-                ltmlSec.SaveDom(@"D:\hit\wanxiang\ltp-service\example3-ltmlSec.xml");
-                ltmlOut.SaveDom(@"D:\hit\wanxiang\ltp-service\example3-ltmlOut.xml");
-	        }
-            catch(Exception e)
-            {
-		        Console.WriteLine(e.Message);
-	        }
-        }
 
         static void Usage()
         {
             Console.WriteLine("Command format error!");
             Console.WriteLine("The Command like:");
-            Console.WriteLine("ltp-service -sentence @option @sentFileName @outXmlFile");
-            Console.WriteLine("ltp-service -xml @option @inXmlFile @outXmlFile");
-            Console.WriteLine("ltp-service -xmlmerge @option @inXmlFile1 @inXmlFile2 @outXmlFile");
+            Console.WriteLine("ltp-service -sentence strAuthorize option sentFileName outXmlFile");
+            Console.WriteLine("sentFileName is of utf8 file format");
+            Console.WriteLine("ltp-service -xml strAuthorize option inXmlFile outXmlFile");
+            Console.WriteLine("ltp-service -xmlmerge strAuthorize option inXmlFile1 inXmlFile2 outXmlFile");
             Console.WriteLine("option can be one of these: ws pos ne wsd parser srl all");
         }
     }
