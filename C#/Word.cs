@@ -207,6 +207,7 @@ namespace ltp_service
                 m_xmlElem.OwnerDocument.CreateTextNode(LTPTag.SRL_ARG);  
                 XmlNode srl = m_xmlElem.OwnerDocument.CreateNode(m_xmlElem.NodeType, LTPTag.SRL_ARG, m_xmlElem.NamespaceURI);
                 XmlElement srl_em = (XmlElement)srl;
+                srl_em.SetAttribute(LTPTag.ID, i.ToString());
 			    srl_em.SetAttribute(LTPTag.SRL_TYPE, srls[i].strType);
 			    srl_em.SetAttribute(LTPTag.SRL_BEGIN, "" + srls[i].iBegin);
 			    srl_em.SetAttribute(LTPTag.SRL_END, "" + srls[i].iEnd);

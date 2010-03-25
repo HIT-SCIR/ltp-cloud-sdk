@@ -10,42 +10,21 @@ namespace ltp_service
         #region Variables
 
         private CirService m_cirServ = null;
-        private bool m_bAuthorized = false;
 
         #endregion
 
         #region Constructions
 
-        public LTPService()
+        public LTPService(String strAuthor)
         {
-            m_cirServ = new CirService();
+            m_cirServ = new CirService(strAuthor);
+            Authorize(strAuthor);
         }
 
         #endregion
 
         #region Public Methods
 
-        public int Authorize(String strAuthor)
-        {
-            try
-            {
-                m_cirServ.Authorize(strAuthor);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                m_bAuthorized = false;
-                return 0;
-            }
-
-            m_bAuthorized = true ;
-            return 1;
-        }
-
-        public bool IsAuthorized()
-        {
-            return m_bAuthorized;
-        }
 
         public bool SetEncoding(String encodeType)
         {
@@ -88,6 +67,25 @@ namespace ltp_service
             LTML ltml_out = new LTML();
             ltml_out.LoadFromXmlStr(resultStr);
             return ltml_out;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private int Authorize(String strAuthor)
+        {
+            try
+            {
+                m_cirServ.Authorize(strAuthor);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return 0;
+            }
+
+            return 1;
         }
 
         #endregion

@@ -26,9 +26,9 @@ namespace ltp_service
 
         #region Constructions
 
-        public CirService()
+        public CirService(string strAuth)
 		{
-
+            Authorize(strAuth);
         }
 
         #endregion
@@ -47,18 +47,7 @@ namespace ltp_service
             {
                 throw new Exception(LtpServiceError.AuthorizeFormatError);
             }
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(m_strUrl);
-            httpWebRequest.Credentials = new NetworkCredential(m_strUserName, m_strPassword);
-            string lcPostData = "s=ltpcwyg";
-            httpWebRequest.Method = "POST";
-            httpWebRequest.ContentType = "application/x-www-form-urlencoded";
-            byte[] lbPostBuffer = Encoding.GetEncoding("gbk").GetBytes(lcPostData);
-            httpWebRequest.ContentLength = lbPostBuffer.Length;
-            Stream loPostData = httpWebRequest.GetRequestStream();
-            loPostData.Write(lbPostBuffer, 0, lbPostBuffer.Length);
-            loPostData.Close();
-            HttpWebResponse loWebResponse = (HttpWebResponse)(httpWebRequest.GetResponse());
-            loWebResponse.Close();
+
         }
 
 

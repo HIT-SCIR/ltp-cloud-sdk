@@ -45,12 +45,7 @@ namespace ltp_service
 
         static void TestSentence(string strAuthorize, string strOption, string strSentFile, string strXMLFile)
         {
-            LTPService ltpService = new LTPService();
-            ltpService.Authorize(strAuthorize);
-            if (!ltpService.IsAuthorized())
-            {
-                return;
-            }
+            LTPService ltpService = new LTPService(strAuthorize);
             LTML ltmlOut = new LTML();
             foreach(String strSentence in File.ReadAllLines(strSentFile,Encoding.UTF8))
             {
@@ -101,12 +96,7 @@ namespace ltp_service
 
         static void TestXmlFile(string strAuthorize, string strOption, string strXMLFileIn, string strXMLFileOut)
         {
-            LTPService ltpService = new LTPService();
-            ltpService.Authorize(strAuthorize);
-            if (!ltpService.IsAuthorized())
-            {
-                return;
-            }
+            LTPService ltpService = new LTPService(strAuthorize);
             LTML ltmlIn = new LTML();
             ltmlIn.LoadFromXmlFile(strXMLFileIn);
             LTML ltml = ltpService.Analyze(strOption, ltmlIn);
@@ -144,12 +134,7 @@ namespace ltp_service
 
         static void TestMergeXmlFile(string strAuthorize, string strOption, string strXMLlFile_Main, string strXMLlFile_Merge, string strXMLlFile_Out)
         {
-            LTPService ltpService = new LTPService();
-            ltpService.Authorize(strAuthorize);
-            if (!ltpService.IsAuthorized())
-            {
-                return;
-            }
+            LTPService ltpService = new LTPService(strAuthorize);
             LTML ltmlMain = new LTML();
             ltmlMain.LoadFromXmlFile(strXMLlFile_Main);
 
