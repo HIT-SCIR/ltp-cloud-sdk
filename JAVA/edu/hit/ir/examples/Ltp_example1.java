@@ -10,7 +10,7 @@ import edu.hit.ir.ltpService.Word;
 public class Ltp_example1 {
 	public static void main(String[] args) {
 
-		LTPService ls = new LTPService("cir:lovehitcir"); 
+		LTPService ls = new LTPService("username:password"); 
 		try {
 			LTML ltml = ls.analyze(LTPOption.ALL,"我们都是赛尔人。");
 //			ltml.printXml();
