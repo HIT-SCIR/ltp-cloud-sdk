@@ -1,7 +1,7 @@
 #ifndef _LTML_H_
 #define _LTML_H_
 
-#include "..\__xml4nlp\XML4NLP.H"
+#include "XML4NLP.H"
 #include "LTPOption.h"
 #include <fstream>
 

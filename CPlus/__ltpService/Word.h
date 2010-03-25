@@ -16,7 +16,7 @@
 #ifndef _WORD_H_
 #define _WORD_H_
 
-#include "../__xml4nlp/tinyxml.h"
+#include "tinyxml.h"
 //#include "XML4NLP.H"
 #include <stdlib.h>
 #include <string>

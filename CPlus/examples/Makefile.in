@@ -36,7 +36,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = ltp1$(EXEEXT)
+bin_PROGRAMS = ltp1$(EXEEXT) ltp2$(EXEEXT) ltp3$(EXEEXT)
 subdir = examples
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -44,6 +44,7 @@ am__aclocal_m4_deps = $(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
+CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
@@ -51,7 +52,13 @@ PROGRAMS = $(bin_PROGRAMS)
 am_ltp1_OBJECTS = example1.$(OBJEXT)
 ltp1_OBJECTS = $(am_ltp1_OBJECTS)
 ltp1_DEPENDENCIES =
-DEFAULT_INCLUDES = -I. -I$(srcdir)
+am_ltp2_OBJECTS = example2.$(OBJEXT)
+ltp2_OBJECTS = $(am_ltp2_OBJECTS)
+ltp2_DEPENDENCIES =
+am_ltp3_OBJECTS = example3.$(OBJEXT)
+ltp3_OBJECTS = $(am_ltp3_OBJECTS)
+ltp3_DEPENDENCIES =
+DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -62,8 +69,8 @@ LTCXXCOMPILE = $(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) \
 CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(ltp1_SOURCES)
-DIST_SOURCES = $(ltp1_SOURCES)
+SOURCES = $(ltp1_SOURCES) $(ltp2_SOURCES) $(ltp3_SOURCES)
+DIST_SOURCES = $(ltp1_SOURCES) $(ltp2_SOURCES) $(ltp3_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -96,7 +103,6 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
-GREP = @GREP@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
@@ -114,7 +120,6 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
 PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
-PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 RANLIB = @RANLIB@
@@ -123,9 +128,12 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
+ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_F77 = @ac_ct_F77@
+ac_ct_RANLIB = @ac_ct_RANLIB@
+ac_ct_STRIP = @ac_ct_STRIP@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
 am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
@@ -142,43 +150,49 @@ build_cpu = @build_cpu@
 build_os = @build_os@
 build_vendor = @build_vendor@
 datadir = @datadir@
-datarootdir = @datarootdir@
-docdir = @docdir@
-dvidir = @dvidir@
 exec_prefix = @exec_prefix@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
 host_os = @host_os@
 host_vendor = @host_vendor@
-htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
 libdir = @libdir@
 libexecdir = @libexecdir@
-localedir = @localedir@
 localstatedir = @localstatedir@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
-pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
-psdir = @psdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-INCLUDES = -I.
+INCLUDES = -I. -I../__ltpService -I../__util -I../__xml4nlp
 ltp1_SOURCES = example1.cpp
 ltp1_LDADD = \
 	-L../__util -lutil \
-	-L../__ltpservice -lltpservice \
-	-L../__xml4nlp -lxml4nlp \
-	-L../__util -lbase64
+	-L../__ltpService -lservice \
+	-L../__xml4nlp -lxml4nlp 
 
 ltp1_LDFLAGS = -ldl
+ltp2_SOURCES = example2.cpp
+ltp2_LDADD = \
+	-L../__util -lutil \
+	-L../__ltpService -lservice \
+	-L../__xml4nlp -lxml4nlp 
+
+ltp2_LDFLAGS = -ldl
+ltp3_SOURCES = example3.cpp
+ltp3_LDADD = \
+	-L../__util -lutil \
+	-L../__ltpService -lservice \
+	-L../__xml4nlp -lxml4nlp 
+
+ltp3_LDFLAGS = -ldl
 all: all-am
 
 .SUFFIXES:
@@ -243,6 +257,12 @@ clean-binPROGRAMS:
 ltp1$(EXEEXT): $(ltp1_OBJECTS) $(ltp1_DEPENDENCIES) 
 	@rm -f ltp1$(EXEEXT)
 	$(CXXLINK) $(ltp1_LDFLAGS) $(ltp1_OBJECTS) $(ltp1_LDADD) $(LIBS)
+ltp2$(EXEEXT): $(ltp2_OBJECTS) $(ltp2_DEPENDENCIES) 
+	@rm -f ltp2$(EXEEXT)
+	$(CXXLINK) $(ltp2_LDFLAGS) $(ltp2_OBJECTS) $(ltp2_LDADD) $(LIBS)
+ltp3$(EXEEXT): $(ltp3_OBJECTS) $(ltp3_DEPENDENCIES) 
+	@rm -f ltp3$(EXEEXT)
+	$(CXXLINK) $(ltp3_LDFLAGS) $(ltp3_OBJECTS) $(ltp3_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -251,6 +271,8 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/example1.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/example2.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/example3.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \

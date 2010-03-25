@@ -1,6 +1,6 @@
 AUTOMAKE_OPTIONS = foreign
 
-##INCLUDES = -I. -I../
+INCLUDES = -I. -I../__xml4nlp -I../__util
 #Note: target part
 lib_LTLIBRARIES = libservice.la
 

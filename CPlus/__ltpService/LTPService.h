@@ -1,8 +1,8 @@
 #ifndef _LTPSERVICE_H_
 #define _LTPSERVICE_H_
 #pragma once
-#include "..\__ltpService\CirService.h"
-#include "Ltml.h"
+#include "CirService.h"
+#include "LTML.h"
 #include <string>
 
 namespace HIT_IR_LTP{

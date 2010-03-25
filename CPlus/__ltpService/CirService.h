@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "LTPOption.h"
-#include "../__util/Base64Encoder.h"
+#include "Base64Encoder.h"
 
 #ifdef LINUX_OS
  #include <netdb.h>
@@ -30,7 +30,7 @@ namespace HIT_IR_LTP{
 	static const int WSD=3;
 	static const int DP=4;
 	static const int SRL=5;
-	//*/
+	// */
 
 	class CirService{
 	public:

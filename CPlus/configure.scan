@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.64])
 AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
-AC_CONFIG_SRCDIR([__util/MyLib.h])
+AC_CONFIG_SRCDIR([__xml4nlp/tinyxmlerror.cpp])
 AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
@@ -11,6 +11,16 @@ AC_PROG_CXX
 AC_PROG_CC
 
 # Checks for libraries.
+# FIXME: Replace `main' with a function in `-lbase64':
+AC_CHECK_LIB([base64], [main])
+# FIXME: Replace `main' with a function in `-ldl':
+AC_CHECK_LIB([dl], [main])
+# FIXME: Replace `main' with a function in `-lltpservice':
+AC_CHECK_LIB([ltpservice], [main])
+# FIXME: Replace `main' with a function in `-lutil':
+AC_CHECK_LIB([util], [main])
+# FIXME: Replace `main' with a function in `-lxml4nlp':
+AC_CHECK_LIB([xml4nlp], [main])
 
 # Checks for header files.
 AC_CHECK_HEADERS([netdb.h stddef.h stdlib.h string.h])
@@ -24,6 +34,9 @@ AC_CHECK_TYPES([ptrdiff_t])
 # Checks for library functions.
 AC_CHECK_FUNCS([gethostbyname memmove socket strchr])
 
-AC_CONFIG_FILES([__util/Makefile
-                 __xml4nlp/Makefile])
+AC_CONFIG_FILES([Makefile
+                 __ltpService/Makefile
+                 __util/Makefile
+                 __xml4nlp/Makefile
+                 examples/Makefile])
 AC_OUTPUT

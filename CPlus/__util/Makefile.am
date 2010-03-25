@@ -6,11 +6,7 @@ lib_LTLIBRARIES = libutil.la
 
 libutil_la_SOURCES = \
 	MyLib.cpp \
-	Mylib.h
-
-lib_LTLIBRARIES = libbase64.la
-
-libbase64_la_SOURCES = \
-	Base64Encode.cpp \
+	Mylib.h \
+	Base64Encoder.cpp \
 	Base64Encoder.h 
 

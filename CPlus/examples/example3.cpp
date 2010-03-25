@@ -14,7 +14,7 @@
 #include "../__ltpService/Word.h"
  
 using namespace HIT_IR_LTP;
-int main_3(){
+int main(){
 	LTPService ls("username:password");
 	LTML ltmlBeg;
 

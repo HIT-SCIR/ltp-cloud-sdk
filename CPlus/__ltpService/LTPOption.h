@@ -1,7 +1,7 @@
 #ifndef _DATA_H_
 #define _DATA_H_
-// #define LINUX_OS
- #define WIN_OS
+ #define LINUX_OS
+// #define WIN_OS
 
 #include <string>
 namespace HIT_IR_LTP{
