@@ -145,9 +145,14 @@ namespace HIT_IR_LTP{
 			analysisOptions = "&t=ws";
 			isAllAnalysis = false;
 		}
-		else if (option == LTPOption.NE)
+		else if (option == LTPOption.POS)
 		{
 			analysisOptions =  "&t=pos";
+			isAllAnalysis = false;
+		}
+		else if (option == LTPOption.NE)
+		{
+			analysisOptions =  "&t=ner";
 			isAllAnalysis = false;
 		}
 		else if (option == LTPOption.PARSER)
