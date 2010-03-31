@@ -21194,6 +21194,8 @@ fi
 
 
 # Checks for libraries.
+#static lib
+#AC_PROG_RANLIB
 # FIXME: Replace `main' with a function in `-lbase64':
 
 { echo "$as_me:$LINENO: checking for main in -lbase64" >&5
@@ -22361,7 +22363,7 @@ fi
 done
 
 
-ac_config_files="$ac_config_files Makefile __ltpService/Makefile __util/Makefile __xml4nlp/Makefile examples/Makefile"
+ac_config_files="$ac_config_files Makefile __ltpService/Makefile __util/Makefile __xml4nlp/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -22953,7 +22955,6 @@ do
     "__ltpService/Makefile") CONFIG_FILES="$CONFIG_FILES __ltpService/Makefile" ;;
     "__util/Makefile") CONFIG_FILES="$CONFIG_FILES __util/Makefile" ;;
     "__xml4nlp/Makefile") CONFIG_FILES="$CONFIG_FILES __xml4nlp/Makefile" ;;
-    "examples/Makefile") CONFIG_FILES="$CONFIG_FILES examples/Makefile" ;;
 
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}

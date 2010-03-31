@@ -23,12 +23,13 @@ We Thank to the author of it -- Lee Thomason
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "../__util/MyLib.h"
-#include "../__ltpService/Word.h"
+#include "MyLib.h"
+#include "Word.h"
+#include "tinyxml.h"
+
 using namespace std;
 //using namespace HIT_IR_LTP;
 
-#include "tinyxml.h"
 
 namespace HIT_IR_LTP{
 

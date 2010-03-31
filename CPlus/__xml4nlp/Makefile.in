@@ -184,6 +184,10 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
+AUTOMAKE_OPTIONS = foreign
+INCLUDES = -I. -I ../__util \
+	-I ../__ltpService
+
 lib_LTLIBRARIES = libxml4nlp.la
 libxml4nlp_la_SOURCES = \
 	tinyxml.cpp tinyxml.h \
@@ -204,9 +208,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  __xml4nlp/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  __xml4nlp/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  __xml4nlp/Makefile
+	  $(AUTOMAKE) --foreign  __xml4nlp/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -467,6 +471,14 @@ uninstall-am: uninstall-info-am uninstall-libLTLIBRARIES
 	tags uninstall uninstall-am uninstall-info-am \
 	uninstall-libLTLIBRARIES
 
+
+#lib_LIBRARIES = libxml4nlp.a
+
+#libxml4nlp_a_SOURCES = \
+#	tinyxml.cpp tinyxml.h \
+#	tinyxmlerror.cpp tinyxmlparser.cpp \
+#	tinystr.cpp tinystr.h \
+#	Xml4nlp.cpp XML4NLP.H
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

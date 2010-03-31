@@ -13,6 +13,8 @@ AC_PROG_CXX
 AC_PROG_CC
 
 # Checks for libraries.
+#static lib
+#AC_PROG_RANLIB	
 # FIXME: Replace `main' with a function in `-lbase64':
 AC_CHECK_LIB([base64], [main])
 # FIXME: Replace `main' with a function in `-ldl':
@@ -40,5 +42,5 @@ AC_CONFIG_FILES([Makefile
                  __ltpService/Makefile
                  __util/Makefile
                  __xml4nlp/Makefile
-                 examples/Makefile])
+                 ])
 AC_OUTPUT

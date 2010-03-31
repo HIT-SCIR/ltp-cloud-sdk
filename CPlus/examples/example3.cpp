@@ -8,10 +8,10 @@
 */
 /************************************************************************/
 
-#include "../__ltpService/LTPOption.h"
-#include "../__ltpService/LTPService.h"
-#include "../__ltpService/LTML.h"
-#include "../__ltpService/Word.h"
+#include "LTPOption.h"
+#include "LTPService.h"
+#include "LTML.h"
+#include "Word.h"
  
 using namespace HIT_IR_LTP;
 int main(){

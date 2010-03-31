@@ -90,4 +90,5 @@ string word(string& word_pos);
 
 bool is_ascii_string(string& word);
 
+
 #endif
