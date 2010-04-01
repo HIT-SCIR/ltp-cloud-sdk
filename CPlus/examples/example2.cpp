@@ -14,7 +14,7 @@
 #include "Word.h"  
 
 using namespace HIT_IR_LTP;
-int main(){
+int main2(){
 	LTPService ls("username:password");
 	LTML ltml;
 	if (!ls.Analyze(LTPOption.ALL,"我们都是赛尔人。", ltml))

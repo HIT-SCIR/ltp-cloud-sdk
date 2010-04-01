@@ -197,18 +197,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\examples\main.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\examples\main1.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\examples\main100.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\__util\MyLib.cpp"
 				>
 			</File>
