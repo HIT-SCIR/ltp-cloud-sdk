@@ -271,10 +271,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\access_log.20060805"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
