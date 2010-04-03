@@ -18,7 +18,7 @@
 
 #ifdef WIN_OS
  #include <Winsock2.h>
- #pragma comment(lib,"libws2_32.a")
+ #pragma comment(lib,"WS2_32.Lib")
 #endif
 
 namespace HIT_IR_LTP{

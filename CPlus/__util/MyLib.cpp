@@ -53,7 +53,7 @@ void join_bystr(const vector<string> &vec, string &str, const string &sep)
 	str = "";
 	if (vec.empty()) return;
 	str = vec[0];
-	int i = 1;
+	size_t i = 1;
 	for(; i < vec.size(); ++i)
 	{
 		str += sep + vec[i];
@@ -78,7 +78,7 @@ void split_bystr(const string &str, vector<string> &vec, const string &sep)
 // remove the blanks at the begin and end of string
 void clean_str(string &str) 
 {
-	int i = 0;
+	size_t i = 0;
 	for (; i < str.size(); ++i) {
 		if (str[i] != ' ' && str[i] != '\t'
 			&& str[i] != '\n' && str[i] != '\r')
