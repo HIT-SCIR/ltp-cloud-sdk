@@ -1,6 +1,8 @@
 package edu.hit.ir.ltpService;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 import org.jdom.JDOMException;
 
@@ -13,6 +15,16 @@ public class LTPService {
 		super();
 		this.cs = new CirService(authorization);
 	}
+	
+	private String getUTF8(String str) {
+		try {
+			return new String(str.getBytes(Charset.forName("ISO-8859-1")),"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
  
 	public LTML analyze(String option, String analyzeString) throws JDOMException, IOException{
 		cs.setAnalysisOptions(option);
@@ -20,7 +32,7 @@ public class LTPService {
 		LTML ltml = new LTML();
 //		ltml.setEncoding(cs.getEncoding());
 		String str = cs.Connect(analyzeString);
-		System.out.println("str here:\n" + str);
+//		System.out.println("str here:\n" + getUTF8(str));
 		ltml.build(str);
 		ltml.setOver();
 		return ltml;

@@ -112,6 +112,7 @@ public class LTML {
 	private Format getFormat(){
 		Format f = Format.getCompactFormat();
 		f.setEncoding(encoding);
+		System.out.println("encoding: " + encoding);
 		f.setIndent("  ");
 		return f;
 	}
@@ -220,6 +221,7 @@ public class LTML {
 	}
 	
 	public String getXMLStr(){
+		System.out.println("xml out putter:");
 		XMLOutputter outputter = new XMLOutputter(getFormat());
 		return outputter.outputString(doc); 
 	}

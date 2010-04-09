@@ -12,14 +12,14 @@ public class CirService {
 //	private int ports = 12345;
 	private int ports = 80;
 //	private String param;
-	private String encoding = "gb2312";
-	private String encoding2 = "gb2312";
+	private String encoding = "gbk";
+	private String encoding2 = "gbk";
 	private String analysisOptions;
 	private boolean isEncoding = false;
 	private boolean isAllAnalysis = true;
 	private boolean dependencyParser = false;
 	private boolean isXml = true;
-	private String authorization;
+	private String authorization; 
 	public CirService(String authorization) {
 		super();
 		this.authorization = authorization;
