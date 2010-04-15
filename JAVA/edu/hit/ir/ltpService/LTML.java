@@ -112,7 +112,7 @@ public class LTML {
 	private Format getFormat(){
 		Format f = Format.getCompactFormat();
 		f.setEncoding(encoding);
-		System.out.println("encoding: " + encoding);
+//		System.out.println("encoding: " + encoding);
 		f.setIndent("  ");
 		return f;
 	}

@@ -12,9 +12,10 @@ public class Ltp_example1 {
 
 		LTPService ls = new LTPService("username:password"); 
 		try {
+			ls.setEncoding(LTPOption.GBK);
 			LTML ltml = ls.analyze(LTPOption.ALL,"我们都是赛尔人。");
 //			ltml.printXml();
-
+			
 			int sentNum = ltml.countSentence();
 			for(int i = 0; i< sentNum; ++i){
 //				逐句访问
@@ -37,6 +38,7 @@ public class Ltp_example1 {
 					System.out.println();
 				}
 			}
+			//*/
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
