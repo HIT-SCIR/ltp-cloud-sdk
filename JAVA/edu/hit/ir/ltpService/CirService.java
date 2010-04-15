@@ -11,19 +11,29 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpException;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.auth.AuthScheme;
 import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.AuthState;
+import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.ExecutionContext;
+import org.apache.http.protocol.HttpContext;
 
-import edu.hit.ir.ltpService.WebCleintAPI.PreemptiveAuth;
+//import edu.hit.ir.webcleitapi.WebCleintAPI.PreemptiveAuth;
 
 public class CirService {
 	public DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -42,7 +52,6 @@ public class CirService {
 	private boolean isAllAnalysis = true;
 	private boolean dependencyParser = false;
 	private boolean isXml = true;
-//	private String authorization;
 	private String usname;
 	private String passwd;
 
@@ -50,7 +59,6 @@ public class CirService {
 		super();
 		usname = authorization.substring(0, authorization.indexOf(":"));
 		passwd = authorization.substring(authorization.indexOf(":") + 1);
-//		this.authorization = authorization;
 	}
 
 	public String Connect(String parameters) {
@@ -68,9 +76,8 @@ public class CirService {
 			parMap.put("s", parameters);
 		}
 		String str = null;
-		try {
-			// WebCleintAPI.setAuthor(authorization);
-			str = doPost(serverAddress, ports, uri, parMap, encoding2);
+		try {			
+			str = Connection.doPost(serverAddress, ports, uri, parMap, encoding2, usname, passwd);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,15 +103,12 @@ public class CirService {
 	}
 
 	public void setAuthorization(String authorization) {
-//		this.authorization = authorization;
 		usname = authorization.substring(0, authorization.indexOf(":"));
 		passwd = authorization.substring(authorization.indexOf(":") + 1);
 	}
 
 	public void setAnalysisOptions(String option) {
 		isAllAnalysis = false;
-		// System.out.println(option);
-		// System.out.println(LTPOption.WS);
 		if (LTPOption.WS.equals(option)) {
 			analysisOptions = "ws";
 			// System.out.println(analysisOptions);
@@ -194,7 +198,43 @@ public class CirService {
 			}
 			return buffer.toString();
 		}
-
 		return null;
+	}
+	
+	static class PreemptiveAuth implements HttpRequestInterceptor {  		  
+        public void process(  
+                final HttpRequest request,   
+                final HttpContext context) throws HttpException, IOException {  
+              
+            AuthState authState = (AuthState) context.getAttribute(  
+                    ClientContext.TARGET_AUTH_STATE);  
+              
+            // If no auth scheme avaialble yet, try to initialize it preemptively  
+            if (authState.getAuthScheme() == null) {  
+                AuthScheme authScheme = (AuthScheme) context.getAttribute(  
+                        "preemptive-auth");  
+                CredentialsProvider credsProvider = (CredentialsProvider) context.getAttribute(  
+                        ClientContext.CREDS_PROVIDER);  
+                HttpHost targetHost = (HttpHost) context.getAttribute(  
+                        ExecutionContext.HTTP_TARGET_HOST);  
+                if (authScheme != null) {  
+                    Credentials creds = credsProvider.getCredentials(  
+                            new AuthScope(  
+                                    targetHost.getHostName(),   
+                                    targetHost.getPort()));  
+                    if (creds == null) {  
+                        throw new HttpException("No credentials for preemptive authentication");  
+                    }  
+                    authState.setAuthScheme(authScheme);  
+                    authState.setCredentials(creds);  
+                }  
+            }  
+              
+        }  
+          
+    }  
+	
+	public void close(){
+		Connection.close();
 	}
 }

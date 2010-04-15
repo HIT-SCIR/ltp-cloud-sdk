@@ -25,17 +25,7 @@ public class LTPService {
 		}
 		return null;
 	}
-	
-	private String getGBK(String str) {
-		try {
-			return new String(str.getBytes(Charset.forName("GBK")),"GBK");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
- 
+	 
 	public LTML analyze(String option, String analyzeString) throws JDOMException, IOException{
 		cs.setAnalysisOptions(option);
 		cs.setXmlOption(false);
@@ -62,7 +52,7 @@ public class LTPService {
 		cs.setAnalysisOptions(option);
 		cs.setXmlOption(false);
 		LTML ltml = new LTML();
-		return getGBK(cs.Connect(analyzeString));
+		return cs.Connect(analyzeString);
 	}
 	
 	public void setAnalysisOptions(String op) {
@@ -81,9 +71,8 @@ public class LTPService {
 		return cs.getEncoding();
 	}
 
-	/*
-	public boolean isAuthrized() {
-		return cs.isAuthrized();
+	public void close() {
+		cs.close();
 	}
-	//*/
+
 }

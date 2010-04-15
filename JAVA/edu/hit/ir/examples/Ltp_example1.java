@@ -10,12 +10,15 @@ import edu.hit.ir.ltpService.Word;
 public class Ltp_example1 {
 	public static void main(String[] args) {
 
-		LTPService ls = new LTPService("username:password"); 
+		LTPService ls = new LTPService("cir:lovehitcir"); 
 		try {
 			ls.setEncoding(LTPOption.GBK);
+//			for(int u = 0; u<100; ++u){
 			LTML ltml = ls.analyze(LTPOption.ALL,"我们都是赛尔人。");
+//			System.out.println(ls.getAnalyze(LTPOption.ALL,"我们都是赛尔人。"));
 //			ltml.printXml();
 			
+			//*
 			int sentNum = ltml.countSentence();
 			for(int i = 0; i< sentNum; ++i){
 //				逐句访问
@@ -39,9 +42,10 @@ public class Ltp_example1 {
 				}
 			}
 			//*/
+//			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		} 
 	}
 }

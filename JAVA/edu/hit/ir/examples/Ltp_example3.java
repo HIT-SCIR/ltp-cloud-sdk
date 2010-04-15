@@ -77,7 +77,6 @@ public class Ltp_example3 {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		} 	
 	}
 }
