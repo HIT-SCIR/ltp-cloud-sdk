@@ -10,7 +10,7 @@ import edu.hit.ir.ltpService.Word;
 public class Ltp_example1 {
 	public static void main(String[] args) {
 
-		LTPService ls = new LTPService("cir:lovehitcir"); 
+		LTPService ls = new LTPService("username:password"); 
 		try {
 			ls.setEncoding(LTPOption.GBK);
 //			for(int u = 0; u<100; ++u){
