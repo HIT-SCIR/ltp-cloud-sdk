@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -75,24 +76,61 @@ public class Connection {
 
 		HttpResponse response = httpclient.execute(httppost, localcontext);
 
+//		System.err.println(response.getStatusLine().toString());
 		if (response.getStatusLine().toString().indexOf("401") >= 0) {
 			throw new RuntimeException("Authorization is denied!");
-		}
+		} else if (response.getStatusLine().toString().indexOf("200") < 0) {
+			throw new RuntimeException(response.getStatusLine().toString());
+		} 
 		HttpEntity res_entity = response.getEntity();
 		
 //		httpclient.getConnectionManager().closeIdleConnections(0, TimeUnit.SECONDS);
 
+//		StringBuffer result = new StringBuffer();
+		String result = "";
 		if (res_entity != null) {
-			InputStream is = res_entity.getContent();
-			BufferedReader in = new BufferedReader(new InputStreamReader(is));
-			StringBuffer buffer = new StringBuffer();
-			String line = "";
-			while ((line = in.readLine()) != null) {
-				buffer.append(line.trim());
-			}
-			return buffer.toString();
+			InputStream is = res_entity.getContent();			
+	
+		    int size;
+		    byte[] tmp = new byte[4098];
+		    int beg=0,leng=tmp.length;
+		    while ((size = is.read(tmp,beg,leng)) != -1)
+		    	if(leng == size) {
+		    		int i;
+		    		for(i = tmp.length-1; i>0; --i){
+		    			if(tmp[i] == '\n') {
+//		    				System.out.println("i: "+i);
+		    				beg = i+1;
+		    		    	result += new String(tmp, 0, beg, charset);
+		    		    	beg = mv2beg(tmp, beg);
+		    		    	leng = tmp.length - beg;
+		    		    	break;
+		    			}
+		    		}
+		    		if(i==0) {
+		    			System.err.println("Warning: the single sentence is too long!");
+				    	result += new String(tmp, 0, tmp.length, charset);			
+				    	beg = 0;
+				    	leng = tmp.length;
+		    		}
+		    	} else {
+			    	result += new String(tmp, 0, beg+size, charset);
+			    	beg = 0;
+			    	leng = tmp.length;
+		    	}
+//		    System.err.println(result);
+		    //*/
+		    
+		    res_entity.consumeContent();
 		}
-		return null;
+		return result;
+	}
+	
+	static int mv2beg(byte[] tmp, int pos) {
+		for(int i = pos,j = 0; i<tmp.length; ++i, ++j) {
+			tmp[j] = tmp[i];
+		}
+		return tmp.length - pos;
 	}
 
 	static class PreemptiveAuth implements HttpRequestInterceptor {

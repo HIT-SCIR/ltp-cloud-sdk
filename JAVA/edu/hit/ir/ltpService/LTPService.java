@@ -18,7 +18,7 @@ public class LTPService {
 	
 	private String getUTF8(String str) {
 		try {
-			return new String(str.getBytes(Charset.forName("ISO-8859-1")),"UTF-8");
+			return new String(str.getBytes(Charset.forName("GBK")),"UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
