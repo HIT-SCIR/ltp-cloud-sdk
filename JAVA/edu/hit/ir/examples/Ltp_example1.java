@@ -12,8 +12,8 @@ public class Ltp_example1 {
 
 		LTPService ls = new LTPService("username:password"); 
 		try {
-			ls.setEncoding(LTPOption.GBK);
-			LTML ltml = ls.analyze(LTPOption.ALL,"ÎÒÃÇ¶¼ÊÇÈü¶ûÈË¡£");
+			ls.setEncoding(LTPOption.UTF8);
+			LTML ltml = ls.analyze(LTPOption.PARSER,"æˆ‘çˆ±åŒ—äº¬å¤©å®‰é—¨ã€‚");
 //			ltml.printXml();
 			
 			//*

@@ -13,7 +13,8 @@ namespace ltp_service
     {
         #region Variables
 
-        private string m_strUrl = @"http://ir.hit.edu.cn/demo/ltp_ws/ltp";
+        // private string m_strUrl = @"http://ir.hit.edu.cn/demo/ltp_ws/ltp";
+        private string m_strUrl = @"http://api.ltp-cloud.com/ltp";
         private string m_strUserName = String.Empty;
         private string m_strPassword = String.Empty;
         private string m_strEncoding = "gbk";

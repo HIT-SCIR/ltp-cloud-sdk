@@ -37,13 +37,11 @@ import org.apache.http.protocol.HttpContext;
 
 public class CirService {
 	public DefaultHttpClient httpclient = new DefaultHttpClient();
-	// private String serverAddress = "192.168.3.134";
-	// private String serverAddress = "202.118.250.16";
-	private String serverAddress = "ir.hit.edu.cn";
-	// private String uri = "/ltp";
-	private String uri = "/demo/ltp_ws/ltp";
+	private String serverAddress = "api.ltp-cloud.com";
+	private String uri = "/ltp";
+	// private String uri = "/demo/ltp_ws/ltp";
 	// private int ports = 12345;
-	private int ports = 80;
+	private int ports = 8080;
 	// private String param;
 	private String encoding = "gbk";
 	private String encoding2 = "gbk";

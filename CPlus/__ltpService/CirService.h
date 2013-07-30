@@ -34,10 +34,10 @@ namespace HIT_IR_LTP{
 
 	class CirService{
 	public:
-		//×¢Òâ³õ³õÊ¼»¯
+		//×¢ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
 		CirService(const std::string& au)
-			:serverAddress("ir.hit.edu.cn"), uris("/demo/ltp_ws/ltp"),ports(80),param()
-	//    :serverAddress("202.118.250.16"),uris("/ltp"),ports(54321),param()
+	//    :serverAddress("ir.hit.edu.cn"), uris("/demo/ltp_ws/ltp"),ports(80),param()
+	      :serverAddress("api.ltp-cloud.com"),uris("/ltp"),ports(8080),param()
 	//    :serverAddress("192.168.3.134"),uris("/ltp"),ports(12345),param()
 	//    :serverAddress("www.hit.edu.cn"),uris("/index.htm"),ports(80),param()
 		,encoding("c="),analysisOptions("t="),isEncoding(false),isAllAnalysis(true)
@@ -57,19 +57,19 @@ namespace HIT_IR_LTP{
 		bool IsAuthorized();
 
 		int Analyze(const std::string& parameters, std::string& message);
-	//    void setS();                //ÉèÖÃÏò·şÎñÆ÷¶Ë·¢ËÍµÄÓï¾ä
-		// void setSplitSentence(); 	// ÉèÖÃÊÇ·ñ½øĞĞ·Ö¶Î
+	//    void setS();                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë·ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½
+		// void setSplitSentence(); 	// ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ğ·Ö¶ï¿½
 		/*
-		void setSegmentWord(); 	    // ÉèÖÃÊÇ·ñ½øĞĞWord segment
-		void setPosTag();		 	// ÉèÖÃÊÇ·ñ½øĞĞPOS Tagging
-		void setNER(); 			    // ÉèÖÃÊÇ·ñ½øĞĞNamed entity recognition
-		void setWSD(); 			    // ÉèÖÃÊÇ·ñ½øĞĞWord sense disambiguation
-		void setGParser(); 			// ÉèÖÃÊÇ·ñ½øĞĞDependency parser
-		void setSRL(); 			    // ÉèÖÃÊÇ·ñ½øĞĞSemantic role labeling
+		void setSegmentWord(); 	    // ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Word segment
+		void setPosTag();		 	// ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½POS Tagging
+		void setNER(); 			    // ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Named entity recognition
+		void setWSD(); 			    // ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Word sense disambiguation
+		void setGParser(); 			// ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Dependency parser
+		void setSRL(); 			    // ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Semantic role labeling
 		//*/
-		bool SetEncoding(const std::string& encodeType);   //ÉèÖÃ±àÂë£ºutf8, gb2312
+		bool SetEncoding(const std::string& encodeType);   //ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ë£ºutf8, gb2312
 		std::string GetEncoding() const;
-		void SetAuthorization(const std::string& authorization);  //ÉèÖÃÊÚÈ¨ĞÅÏ¢
+		void SetAuthorization(const std::string& authorization);  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½Ï¢
 		//ws, pos, ner, wsd, dp, srl
 		void SetAnalysisOptions(const std::string& option);
 		void SetAnalysisAll();
@@ -88,8 +88,8 @@ namespace HIT_IR_LTP{
 		std::string param;
 		std::string encoding;
 		std::string analysisOptions;
-		bool isEncoding;            //×Ö·û±àÂë
-		bool isAllAnalysis;         //È«²¿½âÎö
+		bool isEncoding;            //ï¿½Ö·ï¿½ï¿½ï¿½ï¿½
+		bool isAllAnalysis;         //È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		std::string authorization;
 		bool isXml;
 		#ifdef WIN_OS
