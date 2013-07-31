@@ -13,14 +13,15 @@ class LTPService
         @password = password
     end
 
-    def analyze(input, encoding = 'UTF-8')
+    def analyze(input, opt = nil, encoding = 'UTF-8')
         url = URI('http://' + $addr + ':' + $port + $uris)
         req = Net::HTTP::Post.new(url.path)
         req.basic_auth @username, @password
 
         if input.kind_of? String
             req.set_form_data({'s' => input,
-                          'c' => encoding,})
+                            'c' => encoding, 
+                            't' => (opt.nil? ? LTPOption::ALL : opt)})
 
             res = Net::HTTP.new(url.host, url.port).start do |http|
                 http.request(req)
@@ -29,7 +30,8 @@ class LTPService
             #puts input.to_s
             req.set_form_data({'s' => input.to_s,
                             'x' => 'y',
-                            'c' => encoding,})
+                            'c' => encoding, 
+                            't' => (opt.nil? ? LTPOption::ALL : opt)})
 
             res = Net::HTTP.new(url.host, url.port).start do |http|
                 http.request(req)
@@ -41,3 +43,4 @@ class LTPService
 end
 
 require_relative 'ltpservice/LTML'
+require_relative 'ltpservice/LTPOption'
