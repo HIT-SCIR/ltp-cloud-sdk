@@ -37,7 +37,7 @@ namespace HIT_IR_LTP{
 		//ע�����ʼ��
 		CirService(const std::string& au)
 	//    :serverAddress("ir.hit.edu.cn"), uris("/demo/ltp_ws/ltp"),ports(80),param()
-	      :serverAddress("api.ltp-cloud.com"),uris("/ltp"),ports(8080),param()
+	      :serverAddress("api.ltp-cloud.com"),uris("/ltp_srv/ltp"),ports(8080),param()
 	//    :serverAddress("192.168.3.134"),uris("/ltp"),ports(12345),param()
 	//    :serverAddress("www.hit.edu.cn"),uris("/index.htm"),ports(80),param()
 		,encoding("c="),analysisOptions("t="),isEncoding(false),isAllAnalysis(true)

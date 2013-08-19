@@ -1,7 +1,7 @@
 # ltpservice.rb
 
-$addr = 'api.ltp-cloud.com:8080'
-$port = '80'
+$addr = 'api.ltp-cloud.com'
+$port = '8080'
 $uris = '/ltp_srv/ltp'
 
 require 'net/http'

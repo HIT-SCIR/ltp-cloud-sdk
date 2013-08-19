@@ -38,7 +38,7 @@ import org.apache.http.protocol.HttpContext;
 public class CirService {
 	public DefaultHttpClient httpclient = new DefaultHttpClient();
 	private String serverAddress = "api.ltp-cloud.com";
-	private String uri = "/ltp";
+	private String uri = "/ltp_srv/ltp";
 	// private String uri = "/demo/ltp_ws/ltp";
 	// private int ports = 12345;
 	private int ports = 8080;
