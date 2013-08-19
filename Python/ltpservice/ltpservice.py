@@ -5,7 +5,7 @@ import LTPOption
 from LTML import LTML
 
 addr = "http://api.ltp-cloud.com:8080"
-uris = "/ltp"
+uris = "/ltp_srv/ltp"
 
 class LTPService(object):
     """

@@ -1,8 +1,8 @@
 # ltpservice.rb
 
-$addr = 'ir.hit.edu.cn'
+$addr = 'api.ltp-cloud.com:8080'
 $port = '80'
-$uris = '/demo/ltp_ws/ltp'
+$uris = '/ltp_srv/ltp'
 
 require 'net/http'
 require 'uri'
