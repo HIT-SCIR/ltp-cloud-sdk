@@ -290,7 +290,7 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 |int GetID()|返回词的ID号|
 |string GetPOS()|返回词的词性标注。失败时返回空|
 |string GetNE()|返回词的命名实体识别结果。失败时返回空|
-|String GetWSD()|返回词义消歧结果。失败时返回空|
+|string GetWSD()|返回词义消歧结果。失败时返回空|
 |int GetParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
 |bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
 |bool GetSRLs (std::vector<SRL> &srls)|如果该词是谓词；返回SRL类型的vector<SRL>|
@@ -611,10 +611,10 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 
 |函数名 | 返回值 |
 |-------|--------|
-|string getWS()|返回词的具体内容。失败时返回空|
+|String getWS()|返回词的具体内容。失败时返回空|
 |int getID()|返回词的ID号|
-|string getPOS()|返回词的词性标注。失败时返回空|
-|string getNE()|返回词的命名实体识别结果。失败时返回空|
+|String getPOS()|返回词的词性标注。失败时返回空|
+|String getNE()|返回词的命名实体识别结果。失败时返回空|
 |String getWSD()|返回词义消歧结果。失败时返回空|
 |int getParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
 |bool isPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
@@ -925,7 +925,7 @@ for sid in xrange(result.count_sentence(pid)):
 ```
 
 该用例首先，import ltpservice这个package，然后实例化一个新的Service Client对象，用户名和密码被保存在这个对象中
-。然后，client发起一个请求，并指明分析目标位分词。
+。然后，client调用analyze()发起一个请求，并指明分析目标位分词。
 请求结果返回并保存在一个LTML对象中。
 
 *  例二：将待分析数据保存在LTML类中，发送LTML类型的分析对象得到分析结果
@@ -1133,10 +1133,10 @@ C# 接口的操作主要有以下两个类：
 
 |函数名 | 返回值 |
 |-------|--------|
-|string GetWS()|返回词的具体内容。失败时返回空|
+|String GetWS()|返回词的具体内容。失败时返回空|
 |int GetID()|返回词的ID号|
-|string GetPOS()|返回词的词性标注。失败时返回空|
-|string GetNE()|返回词的命名实体识别结果。失败时返回空|
+|String GetPOS()|返回词的词性标注。失败时返回空|
+|String GetNE()|返回词的命名实体识别结果。失败时返回空|
 |String GetWSD()|返回词义消歧结果。失败时返回空|
 |int GetParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
 |bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
@@ -1456,4 +1456,4 @@ puts "#{word} "
 puts "\n"
 end
 ```
-首先，import ltpservice这个package，然后实例化一个新的Service Client对象，用户名和密码被保存在这个对象中。然后建立一个空的ltml类，将句子内容填入ltml类里面。最后发送请求得到结果
+首先，require ltpservice这个包，然后实例化一个新的Service Client对象，用户名和密码被保存在这个对象中。然后建立一个空的ltml类，将句子内容填入ltml类里面。最后发送请求得到结果
