@@ -299,7 +299,7 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 
 * 用例一：发送string类型的分析对象，得到分析结果，并将结果按分词、ID、词性、命名实体、依存关系、词义消歧、语义角色标注的顺序输出。
 
-```cplusplus
+```cpp
 using namespace HIT_IR_LTP;
 int main(){
     LTPService ls("username:password");
@@ -343,7 +343,7 @@ int main(){
 
 * 用例二：将待分析数据保存在LTML类中，发送LTML类型的分析对象得到分析结果。用例首先进行分词，将所得的词按用户词表进行合并或拆分，并对其进行依存句法分析。本例中将“午夜”与“巴赛罗那”进行了合并。
 
-```cplusplus
+```cpp
 using namespace HIT_IR_LTP;
 int main(){
     LTPService ls("username:password");
@@ -1349,11 +1349,11 @@ require 'ltpservice'
 client = LTPService.new('username', 'password')
 ltml_out = client.analyze('我爱北京天安萌', 'UTF-8')
 pid=0
-for sid in 0…ltml_out.count_sentence(pid)
+for sid in 0...ltml_out.count_sentence(pid)
 ltml_out.get_words(pid,sid).each{|word|
-puts “#{word} ”
+puts "#{word} "
 }
-puts “\n”
+puts "\n"
 end
 ```
 首先，import ltpservice这个package，然后实例化一个新的Service Client对象，用户名和密码被保存在这个对象中。然后，client发起一个请求，并指明分析目标位分词。请求结果返回并保存在一个LTML对象中。然后从该对象取出分析结果
@@ -1368,11 +1368,11 @@ ltml = LTML.new
 ltml.build_from_words(['我', '爱', '北京', '天安门'], 'UTF-8')
 ltml_out=client.analyze(ltml)
 pid=0
-for sid in 0…ltml_out.count_sentence(pid)
+for sid in 0...ltml_out.count_sentence(pid)
 ltml_out.get_words(pid,sid).each{|word|
-puts “#{word} ”
+puts "#{word} "
 }
-puts “\n”
+puts "\n"
 end
 ```
 首先，import ltpservice这个package，然后实例化一个新的Service Client对象，用户名和密码被保存在这个对象中。然后建立一个空的ltml类，将句子内容填入ltml类里面。最后发送请求得到结果
