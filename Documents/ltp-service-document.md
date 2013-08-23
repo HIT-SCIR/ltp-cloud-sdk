@@ -281,6 +281,27 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 返回值：
 
 成功返回true，失败返回false
+###Word
+该类型是对XML的Element进行的封装，任何的分析结果必须先取到Word，才能取到相当相应的分析数据。
+
+|函数名 | 返回值 |
+|-------|--------|
+|string GetWS()|返回词的具体内容。失败时返回空|
+|int GetID()|返回词的ID号|
+|string GetPOS()|返回词的词性标注。失败时返回空|
+|string GetNE()|返回词的命名实体识别结果。失败时返回空|
+|String GetWSD()|返回词义消歧结果。失败时返回空|
+|int GetParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
+bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|bool GetSRLs (std::vector<SRL> &srls)|如果该词是谓词；返回SRL类型的vector<SRL>|
+
+###SRL类型
+SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
+
+|选项名 | 含义述 |
+|-------|--------|
+|SRL.type|公有String类型，语义角色标注类型（结果）|
+|SRL.beg|公有int类型，开始词的ID号|
+|SRL.end|公有int类型，结束词的ID号|
 
 ###LTMLOption
 作为全局常量定义了分析方式类型
@@ -583,6 +604,28 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 |-------|----------|
 | String sentenceContent |插入的组成句子字串。|
 |int paragraphId|选择插入句子的段落号|
+
+###Word
+该类型是对XML的Element进行的封装，任何的分析结果必须先取到Word，才能取到相当相应的分析数据。
+
+|函数名 | 返回值 |
+|-------|--------|
+|string getWS()|返回词的具体内容。失败时返回空|
+|int getID()|返回词的ID号|
+|string getPOS()|返回词的词性标注。失败时返回空|
+|string getNE()|返回词的命名实体识别结果。失败时返回空|
+|String getWSD()|返回词义消歧结果。失败时返回空|
+|int getParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
+bool isPredicate()|检查该词是否是谓词。是返回true，否则返回false。|ArrayList<SRL> getSRLs ()|如果该词是谓词；返回SRL类型的List|
+
+###SRL类型
+SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
+
+|选项名 | 含义述 |
+|-------|--------|
+|SRL.type|公有String类型，语义角色标注类型（结果）|
+|SRL.beg|公有int类型，开始词的ID号|
+|SRL.end|公有int类型，结束词的ID号|
 
 ###LTMLOption
 作为全局常量定义了分析方式类型
@@ -1069,6 +1112,28 @@ int CountSentence
 |-------|----------|
 | String sentenceContent | 插入的组成句子字串。 |
 |int paragraphId |选择插入句子的段落号|
+
+###Word
+该类型是对XML的Element进行的封装，任何的分析结果必须先取到Word，才能取到相当相应的分析数据。
+
+|函数名 | 返回值 |
+|-------|--------|
+|string GetWS()|返回词的具体内容。失败时返回空|
+|int GetID()|返回词的ID号|
+|string GetPOS()|返回词的词性标注。失败时返回空|
+|string GetNE()|返回词的命名实体识别结果。失败时返回空|
+|String GetWSD()|返回词义消歧结果。失败时返回空|
+|int GetParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
+bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|List<SRL> GetSRLs()|如果该词是谓词；返回SRL类型的List<SRL>|
+
+###SRL类型
+SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
+
+|选项名 | 含义述 |
+|-------|--------|
+|SRL.strType|公有String类型，语义角色标注类型（结果）|
+|SRL.iBegin|公有int类型，开始词的ID号|
+|SRL.iEnd|公有int类型，结束词的ID号|
 
 ###LTMLOption
 作为全局常量定义了分析方式类型
