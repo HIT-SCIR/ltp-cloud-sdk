@@ -292,7 +292,8 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 |string GetNE()|返回词的命名实体识别结果。失败时返回空|
 |String GetWSD()|返回词义消歧结果。失败时返回空|
 |int GetParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
-bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|bool GetSRLs (std::vector<SRL> &srls)|如果该词是谓词；返回SRL类型的vector<SRL>|
+|bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
+|bool GetSRLs (std::vector<SRL> &srls)|如果该词是谓词；返回SRL类型的vector<SRL>|
 
 ###SRL类型
 SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
@@ -495,11 +496,11 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 
 |参数名 | 参数描述 |
 |-------|----------|
-| String encodeType | 待销毁的词性标注器的指针|
+| String encodeType | >默认为gbk（LTPOption.GBK），目前仅支持UTF-8(LTPOption.UTF8)及GBK，GB2312。编码的定义请参考LTPOption|
 
 返回值：
 
-销毁成功时返回0，否则返回-1
+成功返回true，失败返回false
 
 **LTML Analyze**
 
@@ -616,7 +617,8 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 |string getNE()|返回词的命名实体识别结果。失败时返回空|
 |String getWSD()|返回词义消歧结果。失败时返回空|
 |int getParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
-bool isPredicate()|检查该词是否是谓词。是返回true，否则返回false。|ArrayList<SRL> getSRLs ()|如果该词是谓词；返回SRL类型的List|
+|bool isPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
+|ArrayList<SRL> getSRLs ()|如果该词是谓词；返回SRL类型的List|
 
 ###SRL类型
 SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
@@ -893,6 +895,18 @@ get_sentence
 | buffer | 待分析句子|
 |encoding|可选参数encoding设置字符编码，默认为可选参数encoding设置字符编码，默认为utf-8，目前仅支持UTF-8及GBK，GB2312|
 
+###LTMLOption
+作为全局常量定义了分析方式类型
+
+|选项名 | 含义述 |
+|LTPOption.WS|分词|
+|LTPOption.POS|词性标注|
+|LTPOption. NE|命名实体识别|
+|LTPOption.WSD|词义消歧|
+|LTPOption. PARSER|依存句法分析|
+|LTPOption.SRL|语义角色标注|
+|LTPOption.ALL|全选|
+
 ##Python调用示例
 
 * 例一：发送string类型的分析对象，得到分析结果
@@ -1007,7 +1021,7 @@ C# 接口的操作主要有以下两个类：
 
 返回值：
 
-待分析的字串
+返回分析结果，为一个LTML类
 
 **LTML Analyze**
 
@@ -1058,7 +1072,7 @@ C# 接口的操作主要有以下两个类：
 
 |参数名 | 参数描述 |
 |-------|----------|
-| int paragraphIdx | 选择提取的段落号|
+| int paragraphIdx | (可缺省)选择提取的段落号|
 |int sentenceIdx|选择提取的句子号（当段落参数缺省时为全篇中句子序号）|
 
 返回值：
@@ -1069,7 +1083,7 @@ C# 接口的操作主要有以下两个类：
 
 功能：
 
-int CountSentence
+计算指定范围句子数量
 
 参数：
 
@@ -1125,7 +1139,8 @@ int CountSentence
 |string GetNE()|返回词的命名实体识别结果。失败时返回空|
 |String GetWSD()|返回词义消歧结果。失败时返回空|
 |int GetParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
-bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|List<SRL> GetSRLs()|如果该词是谓词；返回SRL类型的List<SRL>|
+|bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
+|List<SRL> GetSRLs()|如果该词是谓词；返回SRL类型的List<SRL>|
 
 ###SRL类型
 SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
@@ -1291,7 +1306,7 @@ gem build ltpservice.gemspec
 |-------|----------|
 | input | 分析内容，可以为String类型的字符串，也可以为由用户指定的待分析的LTML对象。|
 |opt|（可选参数）分析方式, 详细见下LTPOption|
-|encoding|可选参数）encoding设置字符编码，默认为utf-8，目前仅支持UTF-8及GBK，GB2312|
+|encoding|(可选参数）encoding设置字符编码，默认为utf-8，目前仅支持UTF-8及GBK，GB2312|
 
 返回值：
 
@@ -1352,7 +1367,6 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 |参数名 | 参数描述 |
 |-------|----------|
 | pid | 可选参数，选择提取的段落号。当缺省时返回全篇的句子数量 |
-|LTML ltmlIn|待分析的信息，为LTML类|
 
 返回值：
 
@@ -1391,7 +1405,7 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 
 |参数名 | 参数描述 |
 |-------|----------|
-| buffer | 待分析句子|
+| sentence | 待分析句子|
 |encoding|可选参数encoding设置字符编码，默认为utf-8，目前仅支持UTF-8及GBK，GB2312|
 
 ###LTMLOption
@@ -1405,6 +1419,7 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 |LTPOption.WSD|词义消歧|
 |LTPOption. PARSER|依存句法分析|
 |LTPOption.SRL|语义角色标注|
+|LTPOption.All|全选|
 
 ##Ruby调用示例
 *   例一：发送string类型的分析对象，得到分析结果
@@ -1422,7 +1437,7 @@ puts "#{word} "
 puts "\n"
 end
 ```
-首先，import ltpservice这个package，然后实例化一个新的Service Client对象，用户名和密码被保存在这个对象中。然后，client发起一个请求，并指明分析目标位分词。请求结果返回并保存在一个LTML对象中。然后从该对象取出分析结果
+首先，require ltpservice这个gem，然后实例化一个新的LTPService对象，用户名和密码被保存在这个对象中。然后，client调用analyze()发起一个请求，并指明分析目标位分词。请求结果返回并保存在一个LTML对象中。然后从该对象取出分析结果
 
 * 例二：将待分析数据保存在LTML类中，发送LTML类型的分析对象得到分析结 
 
