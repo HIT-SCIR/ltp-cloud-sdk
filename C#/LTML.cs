@@ -7,7 +7,7 @@ using System.Xml;
 namespace ltp_service
 {
         //m_wordList not need to be initialized
-    class SentIndex
+    public class SentIndex
     {
         #region Variables
 
@@ -41,7 +41,7 @@ namespace ltp_service
     }
 
     //m_sentenceList not need to be initialized
-    class ParaIndex
+    public class ParaIndex
     {
         #region Variables
 
@@ -74,7 +74,7 @@ namespace ltp_service
         #endregion
     }
 
-    class LTML
+    public class LTML
     {
         #region Variables
 

@@ -216,7 +216,7 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 
 | 参数名 | 参数描述 |
 |-------|----------|
-|std::vector<Word> &wordList|分析结果序列，保存在Word类里|
+|std::vector&lt;Word&gt; &wordList|分析结果序列，保存在Word类里|
 |int sentenceIdx|选择提取的句子序号|
 
 返回值：
@@ -258,7 +258,7 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 
 |参数名 | 参数描述 |
 |-------|----------|
-| const vector<Word> &wordList | 插入的组成句子的单词序列。其中note结点是根据第一个sentence第一个词生成的，必须保证后面句子中的词与第一个词一致，否则会抛异常。|
+| const vector&lt;Word&gt; &wordList | 插入的组成句子的单词序列。其中note结点是根据第一个sentence第一个词生成的，必须保证后面句子中的词与第一个词一致，否则会抛异常。|
 |int paragraphId|选择插入句子的段落号|
 
 返回值：
@@ -281,6 +281,28 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 返回值：
 
 成功返回true，失败返回false
+###Word
+该类型是对XML的Element进行的封装，任何的分析结果必须先取到Word，才能取到相当相应的分析数据。
+
+|函数名 | 返回值 |
+|-------|--------|
+|string GetWS()|返回词的具体内容。失败时返回空|
+|int GetID()|返回词的ID号|
+|string GetPOS()|返回词的词性标注。失败时返回空|
+|string GetNE()|返回词的命名实体识别结果。失败时返回空|
+|string GetWSD()|返回词义消歧结果。失败时返回空|
+|int GetParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
+|bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
+|bool GetSRLs (std::vector&lt;SRL&gt; &srls)|如果该词是谓词；返回SRL类型的vector&lt;SRL&gt;|
+
+###SRL类型
+SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
+
+|选项名 | 含义述 |
+|-------|--------|
+|SRL.type|公有String类型，语义角色标注类型（结果）|
+|SRL.beg|公有int类型，开始词的ID号|
+|SRL.end|公有int类型，结束词的ID号|
 
 ###LTMLOption
 作为全局常量定义了分析方式类型
@@ -299,7 +321,7 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 
 * 用例一：发送string类型的分析对象，得到分析结果，并将结果按分词、ID、词性、命名实体、依存关系、词义消歧、语义角色标注的顺序输出。
 
-```cplusplus
+```cpp
 using namespace HIT_IR_LTP;
 int main(){
     LTPService ls("username:password");
@@ -343,7 +365,7 @@ int main(){
 
 * 用例二：将待分析数据保存在LTML类中，发送LTML类型的分析对象得到分析结果。用例首先进行分词，将所得的词按用户词表进行合并或拆分，并对其进行依存句法分析。本例中将“午夜”与“巴赛罗那”进行了合并。
 
-```cplusplus
+```cpp
 using namespace HIT_IR_LTP;
 int main(){
     LTPService ls("username:password");
@@ -422,7 +444,7 @@ Java 接口的操作主要有以下两个类：
 
 右击你创建的工程的根目录，点击Properties进入Properties, 在Properties页面中选中Java Build Path，选中Libraries标签，点击Add External JARs。选中LTPService.jar即可。
 
-***缺啊图片***
+![java compiler](https://github.com/HIT-SCIR/ltp-web/blob/master/ltpwebsite/static/img/java_compiler.gif?raw=true)
 
 第二步编译：
 
@@ -474,11 +496,11 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 
 |参数名 | 参数描述 |
 |-------|----------|
-| String encodeType | 待销毁的词性标注器的指针|
+| String encodeType | >默认为gbk（LTPOption.GBK），目前仅支持UTF-8(LTPOption.UTF8)及GBK，GB2312。编码的定义请参考LTPOption|
 
 返回值：
 
-销毁成功时返回0，否则返回-1
+成功返回true，失败返回false
 
 **LTML Analyze**
 
@@ -518,7 +540,7 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 位于edu.hit.ir.ltpService.LTML
 该类是对返回的数据(xml)进行解析的主要对象。
 
-**ArrayList<Word>  getWords**
+**ArrayList&lt;Word&gt; getWords**
 
 功能：
 
@@ -532,7 +554,7 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 |int sentenceIdx|选择提取的句子序号|
 返回值：
 
-提取的LTML分析结果。
+提取的LTML分析结果，为Word类型。
 
 **String getSentenceContent**
 
@@ -568,7 +590,7 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 
 |参数名 | 参数描述 |
 |-------|----------|
-| ArrayList<Word> wordList | 插入的组成句子的单词序列。其中note结点是根据第一个sentence第一个词生成的，必须保证后面句子中的词与第一个词一致，否则会抛异常。|
+| ArrayList&lt;Word&gt; wordList | 插入的组成句子的单词序列。其中note结点是根据第一个sentence第一个词生成的，必须保证后面句子中的词与第一个词一致，否则会抛异常。|
 |int paragraphId|选择插入句子的段落号|
 
 **void addSentence**
@@ -583,6 +605,29 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 |-------|----------|
 | String sentenceContent |插入的组成句子字串。|
 |int paragraphId|选择插入句子的段落号|
+
+###Word
+该类型是对XML的Element进行的封装，任何的分析结果必须先取到Word，才能取到相当相应的分析数据。
+
+|函数名 | 返回值 |
+|-------|--------|
+|String getWS()|返回词的具体内容。失败时返回空|
+|int getID()|返回词的ID号|
+|String getPOS()|返回词的词性标注。失败时返回空|
+|String getNE()|返回词的命名实体识别结果。失败时返回空|
+|String getWSD()|返回词义消歧结果。失败时返回空|
+|int getParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
+|bool isPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
+|ArrayList&lt;SRL&gt; getSRLs ()|如果该词是谓词；返回SRL类型的List|
+
+###SRL类型
+SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
+
+|选项名 | 含义述 |
+|-------|--------|
+|SRL.type|公有String类型，语义角色标注类型（结果）|
+|SRL.beg|公有int类型，开始词的ID号|
+|SRL.end|公有int类型，结束词的ID号|
 
 ###LTMLOption
 作为全局常量定义了分析方式类型
@@ -850,6 +895,18 @@ get_sentence
 | buffer | 待分析句子|
 |encoding|可选参数encoding设置字符编码，默认为可选参数encoding设置字符编码，默认为utf-8，目前仅支持UTF-8及GBK，GB2312|
 
+###LTMLOption
+作为全局常量定义了分析方式类型
+
+|选项名 | 含义述 |
+|LTPOption.WS|分词|
+|LTPOption.POS|词性标注|
+|LTPOption. NE|命名实体识别|
+|LTPOption.WSD|词义消歧|
+|LTPOption. PARSER|依存句法分析|
+|LTPOption.SRL|语义角色标注|
+|LTPOption.ALL|全选|
+
 ##Python调用示例
 
 * 例一：发送string类型的分析对象，得到分析结果
@@ -868,7 +925,7 @@ for sid in xrange(result.count_sentence(pid)):
 ```
 
 该用例首先，import ltpservice这个package，然后实例化一个新的Service Client对象，用户名和密码被保存在这个对象中
-。然后，client发起一个请求，并指明分析目标位分词。
+。然后，client调用analyze()发起一个请求，并指明分析目标位分词。
 请求结果返回并保存在一个LTML对象中。
 
 *  例二：将待分析数据保存在LTML类中，发送LTML类型的分析对象得到分析结果
@@ -886,3 +943,517 @@ result = client.analysis(ltml, ltpservice.LTPOption.PARSER)
 print result.tostring()
 ```
 首先，import ltpservice这个package，然后实例化一个新的Service Client对象，用户名和密码被保存在这个对象中。然后建立一个空的ltml类，将句子内容填入ltml类里面。最后发送请求得到结果
+
+#C# 版Client
+LTP需要与服务器进行交互，以完成对文本的分析，分析的返回结果存储在以DOM形式组织的XML中，客户端接到分析结果后可通过提供的接口对结果进行分析。
+
+C# 接口的操作主要有以下两个类：
+*   LTPService类为与服务器交互类，负责验证、连接分析参数设置等。
+*	LTML类为返回数据(XML)解析函数，专门负责数据的提取。
+
+##编译说明
+
+*  Visual Studio 编译：
+
+  * 第一步：添加引用的库函数：
+
+  右击你创建的工程的引用目录，点击添加引用后弹出对话框，在浏览页面中选中你要添加的动态链接库便可。
+  ![Cs compiler](https://github.com/HIT-SCIR/ltp-web/blob/master/ltpwebsite/static/img/Cs_complier.jpg?raw=true)
+
+  * 第二步：编译
+
+  在头部添加使用名空间：```using ltp_service```，即可顺利编译
+
+*   命令行编译：
+  * 由于编译时需要调用动态链接库，所以执行下面命令
+    
+     编译 ：```csc  /reference:/…/ltp-service.dll /…/YouProgram.cs```
+     运行 ：   ```YouProgram.exe```
+   * 若用户想自己对源代码进行修改，自己生成.dll文件可以执行下面指令
+    
+     ```csc	/target:library  /out:ltp-service.dll *.cs```
+
+##主要函数接口
+###LTPService类
+位于名空间ltp_service下。
+该类主要负责与服务器交互，并将返回结果以Ltml对象返回。
+
+**LTPService**
+
+功能：
+
+构造函数，初始化用户信息
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| String authorization|用户验证信息，信息格式为：”username:password”|
+
+**bool SetEncoding**
+
+功能：
+
+设置字符编码。
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| String encodeType |默认为gbk（LTPOption.GBK），目前仅支持UTF-8(LTPOption.UTF8)及GBK，GB2312。编码的定义请参考LTPOption|
+
+返回值：
+
+成功返回true，失败返回false
+
+**LTML Analyze**
+
+功能：
+
+发送字符串类型待分析信息，得到服务器分析结果。
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| String option | 分析方式，分析的方式LTPOption.xxx。可参阅LTPOption类|
+|String analyzeString|待分析的字串|
+
+返回值：
+
+返回分析结果，为一个LTML类
+
+**LTML Analyze**
+
+功能：
+
+发送LTML类型待分析信息，得到服务器分析结果。也可以根据自己的需求完成部分中文信息处理，保存在LTML类里，让服务器帮你完成其他任务。
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| String option | 分析方式，分析的方式LTPOption.xxx。可参阅LTPOption类|
+|LTML ltmlIn|待分析的信息，为LTML类|
+
+返回值：
+
+返回分析结果，为一个LTML类
+
+###LTML类
+
+位于名空间ltp_service
+该类是对返回的数据(xml)进行解析的主要对象。
+
+**List&lt;Word&gt; GetWords**
+
+功能：
+
+提取LTML分析结果
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| int paragraphId | （可缺省）选择提取的段落序号 |
+|int sentenceIdx |选择提取的句子序号（当段落参数缺省时为全篇中句子序号）|
+
+返回值：
+
+提取的LTML分析结果,为Word类型
+
+**String GetSentenceContent**
+
+功能：
+
+提取分句结果。
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| int paragraphIdx | (可缺省)选择提取的段落号|
+|int sentenceIdx|选择提取的句子号（当段落参数缺省时为全篇中句子序号）|
+
+返回值：
+
+提取的分句结果
+
+**int CountSentence**
+
+功能：
+
+计算指定范围句子数量
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| int paragraphIdx | （可缺省）选择提取的段落号（当缺省时则计算全篇的句子数量）|
+
+返回值：
+
+选定范围的句子数量
+
+以下几个方法是向LTML对象写数据的方法。注意以下几个问题：
+
+1.    请保证调用以下方法的LTML对象为空的，或首先调用过ClearDOM方法，以保证LTML对象中数据一致；
+2.    输入的数据必须保证一致，例如，如果第一个词完成了词性标注，则其余词也须完成词性标注，因为LTML对象是根据第一个词或第一句话生成的note结点；
+
+已经调用SetOver的LTML对象不允许调用以下方法，否则会抛异常；凡是由LTPService对象返回的LTML对象都调用过SetOver方法；
+
+**void AddSentence**
+
+功能：
+
+在LTML中写入句子。输入完成部分分析的单词序列
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| List&lt;Word&gt; wordList | 插入的组成句子的单词序列。其中note结点是根据第一个sentence第一个词生成的，必须保证后面句子中的词与第一个词一致，否则会抛异常。|
+|int paragraphId|选择插入句子的段落号|
+
+**void AddSentence**
+
+功能：
+
+功能：在LTML中写入句子。输入尚未做分词的字串
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| String sentenceContent | 插入的组成句子字串。 |
+|int paragraphId |选择插入句子的段落号|
+
+###Word
+该类型是对XML的Element进行的封装，任何的分析结果必须先取到Word，才能取到相当相应的分析数据。
+
+|函数名 | 返回值 |
+|-------|--------|
+|String GetWS()|返回词的具体内容。失败时返回空|
+|int GetID()|返回词的ID号|
+|String GetPOS()|返回词的词性标注。失败时返回空|
+|String GetNE()|返回词的命名实体识别结果。失败时返回空|
+|String GetWSD()|返回词义消歧结果。失败时返回空|
+|int GetParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
+|bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
+|List&lt;SRL&gt; GetSRLs()|如果该词是谓词；返回SRL类型的List&lt;SRL&gt;|
+
+###SRL类型
+SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
+
+|选项名 | 含义述 |
+|-------|--------|
+|SRL.strType|公有String类型，语义角色标注类型（结果）|
+|SRL.iBegin|公有int类型，开始词的ID号|
+|SRL.iEnd|公有int类型，结束词的ID号|
+
+###LTMLOption
+作为全局常量定义了分析方式类型
+
+|选项名 | 含义述 |
+|-------|---------|
+|LTPOption.WS|分词|
+|LTPOption.POS|词性标注|
+|LTPOption. NE|命名实体识别|
+|LTPOption.WSD|词义消歧|
+|LTPOption. PARSER|依存句法分析|
+|LTPOption.SRL|语义角色标注|
+
+##C#调用示例
+*  例一：发送string类型的分析对象，得到分析结果。并将结果按分词、ID、词性、命名实体、依存关系、词义消歧、语义角色标注的顺序输出。
+
+```cs
+static void Main()
+        {
+                LTPService ltpService = new LTPService(strAuthorize);
+                String strSentence_new = "今天天气好晴朗，处处好风光。好听吗？";
+                LTML ltml = ltpService.Analyze(LTPOption.ALL, strSentence_new);
+                int sentNum = ltml.CountSentence();
+                for (int i = 0; i < sentNum; ++i)
+                {
+                    string sentCont = ltml.GetSentenceContent(i);
+                    Console.WriteLine(sentCont);
+                    List<Word> wordList = ltml.GetWords(i);
+                    foreach (Word curWord in wordList)
+                    {
+                        Console.Write(curWord.GetWS() + "\t" + curWord.GetID());
+                        Console.Write("\t" + curWord.GetPOS());
+                        Console.Write("\t" + curWord.GetNE());
+                        Console.Write("\t" + curWord.GetParserParent() + "\t" + curWord.GetParserRelation());
+                        Console.Write("\t" + curWord.GetWSD() + "\t" + curWord.GetWSDExplanation());
+                        Console.WriteLine();
+                        if (curWord.IsPredicate())
+                        {
+                            List<SRL> srls = curWord.GetSRLs();
+                            Console.WriteLine(srls.Count);
+                            foreach (SRL srl in srls)
+                            {
+                                Console.WriteLine(srl.ToString());
+                            }
+                        }
+                    }
+                }           
+        }
+```
+该用例首先实例化一个新的Service Client对象，用户名和密码被保存在这个对象中。然后，client发起一个请求，并指明分析目标位分词。请求结果返回并保存在一个LTML对象中。
+
+* 例二：将待分析数据保存在LTML类中，发送LTML类型的分析对象得到分析结果。用例首先进行分词，将所得的词按用户词表进行合并或拆分，并对其进行依存句法分析。
+本例中将“午夜”与“巴赛罗那”进行了合并。
+
+```cs
+public static void Main() {
+        LTPService ls = new LTPService("username:password"); 
+        try {
+            LTML ltmlBeg = ls.Analyze(LTPOption.WS," 午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想。");
+            LTML ltmlSec = new LTML();
+            int sentNum = ltmlBeg.CountSentence();
+            for(int i = 0; i< sentNum; ++i){
+                List<Word> wordList = ltmlBeg.GetWords(i);
+                foreach (Word curWord in wordList)
+                {
+                    Console.WriteLine("\t" + curWord.GetID());
+                    Console.WriteLine("\t" + curWord.GetWS());
+                    Console.WriteLine();
+                }               
+//              merge
+                List<Word> mergeList = new List<Word>();
+                Word mergeWord = new Word();
+                mergeWord.SetWS(wordList[0].GetWS()+wordList[1].GetWS());
+                mergeList.Add(mergeWord);
+                for(int j = 2; j < wordList.Count; ++j){
+                    Word others = new Word();
+                    others.SetWS(wordList[j].GetWS());
+                    mergeList.Add(others);
+                }
+                ltmlSec.AddSentence(mergeList, 0);
+            }
+            ltmlSec.SetOver();
+            Console.WriteLine("\nmerge and get parser results.");
+            LTML ltmlOut = ls.Analyze(LTPOption.PARSER, ltmlSec);
+            for(int i = 0; i< sentNum; ++i){
+                List<Word> wordList = ltmlOut.GetWords(i);
+                foreach (Word curWord in wordList){
+                    Console.WriteLine("\t" + curWord.GetID());
+                    Console.WriteLine("\t" + curWord.GetWS());
+                    Console.WriteLine("\t" + curWord.GetPOS());
+                    Console.WriteLine("\t" + curWord.GetParserParent() + "\t" + curWord.GetParserRelation());                    
+                    Console.WriteLine();
+                }
+            }
+        }           
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }    
+    }
+```
+该用例首先将原始句子发出，返回得到一个ltml的结果。将结果中的单词合并放到一个wordlist中。同时建立一个空的ltml类，将wordlist内容填入ltml类里面。最后再次发回，得到结果。
+
+#Ruby版Client
+LTP需要与服务器进行交互，以完成对文本的分析，分析的返回结果存储在以DOM形式组织的XML中，客户端接到分析结果后可通过提供的接口对结果进行分析。
+
+Python 接口的操作主要有以下两个类：
+
+*   LTPService类为与服务器交互类，负责验证、连接分析参数设置等。
+*	LTML类为返回数据(XML)解析函数，专门负责数据的存取。
+
+##编译说明
+
+* 安装gem包
+
+  在Ruby目录下执行如下命令：
+```
+gem build ltpservice.gemspec
+[sudo] gem install ltpservice-0.0.0.gem
+```
+
+* 运行
+
+  以样例为例，执行如下命令：
+```ruby test/example1.rb```
+
+##主要函数接口
+###LTPService类
+位于ltpservice 包内
+该类主要负责与服务器交互，并将返回结果以Ltml对象返回。
+
+**LTPService**
+
+功能：
+
+构造函数，初始化用户信息
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| username | 用户名 |
+|password|用户密码|
+
+**Analyze**
+
+功能：
+
+发送字符串类型待分析信息，得到服务器分析结果
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| input | 分析内容，可以为String类型的字符串，也可以为由用户指定的待分析的LTML对象。|
+|opt|（可选参数）分析方式, 详细见下LTPOption|
+|encoding|(可选参数）encoding设置字符编码，默认为utf-8，目前仅支持UTF-8及GBK，GB2312|
+
+返回值：
+
+返回分析结果，为一个LTML类
+
+###LTML类
+LTML类位于ltpservice包内；
+LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
+该类是对返回的数据(XML串)进行解析的主要对象。
+
+**LTML**
+
+功能：
+
+构造函数，生成一个LTML类
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| xmlstr | 可选参数xmlstr为XML串，用于生成LTML对象；也可以缺省，生成空的LTML对象|
+
+**get_sentence**
+
+功能：
+
+取得LTML中的分析结果
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| pid | 选择提取的段落号 |
+|sid|选择提取的句子号|
+
+返回值：
+
+返回中文分析结果序列，为str数组里
+
+**count_paragraph**
+
+功能：
+
+计算分析结果中段落数
+
+返回值：
+
+返回分析结果中段落数
+
+**count_sentence**
+
+功能：
+
+计算LTML中的句子数量
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| pid | 可选参数，选择提取的段落号。当缺省时返回全篇的句子数量 |
+
+返回值：
+
+返回句子数量
+
+**to_s**
+
+功能：
+
+将LTML转为字符串
+
+返回值：
+
+将LTML转为字符串
+
+**build_from_words**
+
+功能：
+
+向LTML对象写入完成一定分析内容的单词序列
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| words | 输入分词序列，words为一个str的列表，例如[“我”,”爱”,”北京”,”天安门”]。 |
+|encoding |（可选参数）encoding设置字符编码，默认为utf-8，目前仅支持UTF-8及GBK，GB2312|
+
+**build**
+
+功能：
+
+向LTML对象写入一个未完成分词的待分析句子
+
+参数：
+
+|参数名 | 参数描述 |
+|-------|----------|
+| sentence | 待分析句子|
+|encoding|可选参数encoding设置字符编码，默认为utf-8，目前仅支持UTF-8及GBK，GB2312|
+
+###LTMLOption
+作为全局常量定义了分析方式类型
+
+|选项名 | 含义述 |
+|-------|---------|
+|LTPOption.WS|分词|
+|LTPOption.POS|词性标注|
+|LTPOption. NE|命名实体识别|
+|LTPOption.WSD|词义消歧|
+|LTPOption. PARSER|依存句法分析|
+|LTPOption.SRL|语义角色标注|
+|LTPOption.All|全选|
+
+##Ruby调用示例
+*   例一：发送string类型的分析对象，得到分析结果
+
+```ruby
+require 'ltpservice'
+
+client = LTPService.new('username', 'password')
+ltml_out = client.analyze('我爱北京天安萌', 'UTF-8')
+pid=0
+for sid in 0...ltml_out.count_sentence(pid)
+ltml_out.get_words(pid,sid).each{|word|
+puts "#{word} "
+}
+puts "\n"
+end
+```
+首先，require ltpservice这个gem，然后实例化一个新的LTPService对象，用户名和密码被保存在这个对象中。然后，client调用analyze()发起一个请求，并指明分析目标位分词。请求结果返回并保存在一个LTML对象中。然后从该对象取出分析结果
+
+* 例二：将待分析数据保存在LTML类中，发送LTML类型的分析对象得到分析结 
+
+```ruby
+# encoding: UTF-8
+require 'ltpservice'
+client = LTPService.new('username', 'password')
+ltml = LTML.new
+ltml.build_from_words(['我', '爱', '北京', '天安门'], 'UTF-8')
+ltml_out=client.analyze(ltml)
+pid=0
+for sid in 0...ltml_out.count_sentence(pid)
+ltml_out.get_words(pid,sid).each{|word|
+puts "#{word} "
+}
+puts "\n"
+end
+```
+首先，require ltpservice这个包，然后实例化一个新的Service Client对象，用户名和密码被保存在这个对象中。然后建立一个空的ltml类，将句子内容填入ltml类里面。最后发送请求得到结果
