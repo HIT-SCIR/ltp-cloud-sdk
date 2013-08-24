@@ -16,10 +16,10 @@ public class Ltp_example3 {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		LTPService ls = new LTPService("username:password"); 
+		LTPService ls = new LTPService("email:token"); 
 		
 		try {
-			LTML ltmlBeg = ls.analyze(LTPOption.WS,"¡¶ÎçÒ¹°ÍÈûÂŞÄÇ¡·ÊÇ¶Ô°®ÇéµÄÒ»´ÎÚ¶Ğ³¡¢³äÂúÖÇ»Û¡¢¶À¾ß½³ĞÄµÄÚ¤Ïë¡£");
+			LTML ltmlBeg = ls.analyze(LTPOption.WS,"ã€Šåˆå¤œå·´å¡ç½—é‚£ã€‹æ˜¯å¯¹çˆ±æƒ…çš„ä¸€æ¬¡è¯™è°ã€å……æ»¡æ™ºæ…§ã€ç‹¬å…·åŒ å¿ƒçš„å†¥æƒ³ã€‚");
 //			ltml.printXml();
 			LTML ltmlSec = new LTML();
 
@@ -44,19 +44,7 @@ public class Ltp_example3 {
 					others.setWS(wordList.get(j).getWS());
 					mergeList.add(others);
 				}
-				//*/
-				/*
-				for(int j = 2; j < wordList.size(); ++j){
-					Word others = new Word();
-					if(j != 10){
-						others.setWS(wordList.get(j).getWS());
-					}else{
-						others.setWS(wordList.get(10).getWS()+wordList.get(11).getWS());
-						++j;
-					}
-					mergeList.add(others);
-				}
-//				*/
+
 				ltmlSec.addSentence(mergeList, 0);
 			}
 			ltmlSec.setOver();

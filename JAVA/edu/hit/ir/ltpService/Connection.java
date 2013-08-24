@@ -161,7 +161,6 @@ public class Connection {
 					authState.setCredentials(creds);
 				}
 			}
-
 		}
 
 	}

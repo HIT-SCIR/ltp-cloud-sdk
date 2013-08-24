@@ -12,68 +12,56 @@ public class Ltp_example2 {
 
 	/**
 	 * <p>Title: main</p>
-	 * <p>Description: </p>
+	 * <p>Description:</p>
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		LTPService ls = new LTPService("username:password"); 		
+		LTPService ls = new LTPService("email:token");
 		LTML ltml = new LTML();
-		
+
 		ArrayList<Word> wordList = new ArrayList<Word>();
-		
-		Word w1 = new Word();	
-		w1.setWS("ÎÒ");
-		w1.setPOS("r");
-		wordList.add(w1);
 
-		Word w2 = new Word();	
-		w2.setWS("°®");
-		w2.setPOS("v");
-		wordList.add(w2);
-
-		Word w3 = new Word();	
-		w3.setWS("±±¾©");
-		w3.setPOS("ns");
-		wordList.add(w3);
-
-		Word w4 = new Word();	
-		w4.setWS("Ìì°²ÃÅ");
-		w4.setPOS("ns");
-		wordList.add(w4);
+		Word w1 = new Word(); w1.setWS("æˆ‘");     w1.setPOS("r");  wordList.add(w1);
+		Word w2 = new Word(); w2.setWS("çˆ±");     w2.setPOS("v");  wordList.add(w2);
+		Word w3 = new Word(); w3.setWS("åŒ—äº¬");   w3.setPOS("ns"); wordList.add(w3);
+		Word w4 = new Word(); w4.setWS("å¤©å®‰é—¨"); w4.setPOS("ns"); wordList.add(w4);
 
 		try {
 			ltml.setParagraphNumber(2);
 			ltml.addSentence(wordList, 0);
 			
-			ltml = ls.analyze(LTPOption.WSD,ltml);
-			
+			ltml.printXml();
+
+			ltml = ls.analyze(LTPOption.WSD, ltml);
+
 			int sentNum = ltml.countSentence();
-			for(int i = 0; i< sentNum; ++i){
+			for (int i = 0; i < sentNum; ++i) {
 				ArrayList<Word> sentWords = ltml.getWords(i);
-				for(int j = 0; j < sentWords.size(); ++j){
-					if(ltml.hasWS()){
+				for (int j = 0; j < sentWords.size(); ++j) {
+					if (ltml.hasWS()) {
 						System.out.print("\t" + sentWords.get(j).getWS());
 					}
-					if(ltml.hasPOS()){
+					if (ltml.hasPOS()) {
 						System.out.print("\t" + sentWords.get(j).getPOS());
 					}
-					if(ltml.hasNE()){
+					if (ltml.hasNE()) {
 						System.out.print("\t" + sentWords.get(j).getNE());
 					}
-					if(ltml.hasWSD()){
-						System.out.print("\t" + sentWords.get(j).getWSD() + "\t" + sentWords.get(j).getWSDExplanation());
+					if (ltml.hasParser()) {
+						System.out.print("\t"
+						        + sentWords.get(j).getParserParent() + "\t"
+						        + sentWords.get(j).getParserRelation());
 					}
-					if(ltml.hasParser()){
-						System.out.print("\t" + sentWords.get(j).getParserParent() + "\t" + sentWords.get(j).getParserRelation());
-					}
-					
-					if(ltml.hasSRL() && sentWords.get(j).isPredicate()){
+
+					if (ltml.hasSRL() && sentWords.get(j).isPredicate()) {
 						ArrayList<SRL> srls = sentWords.get(j).getSRLs();
 						System.out.println();
-						for(int k = 0; k <srls.size(); ++k){
-							System.out.println("\t\t" + srls.get(k).type + "\t" + srls.get(k).beg + "\t" + srls.get(k).end);
+						for (int k = 0; k < srls.size(); ++k) {
+							System.out.println("\t\t" + srls.get(k).type + "\t"
+							        + srls.get(k).beg + "\t" + srls.get(k).end);
 						}
 					}
 					System.out.println();

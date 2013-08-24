@@ -10,13 +10,11 @@ import edu.hit.ir.ltpService.Word;
 public class Ltp_example1 {
 	public static void main(String[] args) {
 
-		LTPService ls = new LTPService("username:password"); 
+		LTPService ls = new LTPService("email:token"); 
 		try {
 			ls.setEncoding(LTPOption.UTF8);
 			LTML ltml = ls.analyze(LTPOption.PARSER,"我爱北京天安门。");
-//			ltml.printXml();
-			
-			//*
+
 			int sentNum = ltml.countSentence();
 			for(int i = 0; i< sentNum; ++i){
 				ArrayList<Word> wordList = ltml.getWords(i);
@@ -25,7 +23,6 @@ public class Ltp_example1 {
 					System.out.print("\t" + wordList.get(j).getWS());
 					System.out.print("\t" + wordList.get(j).getPOS());
 					System.out.print("\t" + wordList.get(j).getNE());
-					System.out.print("\t" + wordList.get(j).getWSD() + "\t" + wordList.get(j).getWSDExplanation());
 					System.out.print("\t" + wordList.get(j).getParserParent() + "\t" + wordList.get(j).getParserRelation());
 					if(ltml.hasSRL() && wordList.get(j).isPredicate()){
 						ArrayList<SRL> srls = wordList.get(j).getSRLs();
