@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ltp_service
 {
-    class LTPService
+    public class LTPService
     {
         #region Variables
 

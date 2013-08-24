@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace ltp_service
 {
-    class SRL
+    public class SRL
     {
         #region Variables
 
@@ -59,7 +59,7 @@ namespace ltp_service
         #endregion
     }
 
-    class Word
+    public class Word
     {
         #region Variables
 
