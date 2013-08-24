@@ -444,7 +444,7 @@ Java 接口的操作主要有以下两个类：
 
 右击你创建的工程的根目录，点击Properties进入Properties, 在Properties页面中选中Java Build Path，选中Libraries标签，点击Add External JARs。选中LTPService.jar即可。
 
-![java compiler](https://github.com/HIT-SCIR/ltp-web/blob/master/ltpwebsite/static/img/java_compiler.gif)
+![java compiler](https://github.com/HIT-SCIR/ltp-web/blob/master/ltpwebsite/static/img/java_compiler.gif?raw=true)
 
 第二步编译：
 
@@ -958,7 +958,7 @@ C# 接口的操作主要有以下两个类：
   * 第一步：添加引用的库函数：
 
   右击你创建的工程的引用目录，点击添加引用后弹出对话框，在浏览页面中选中你要添加的动态链接库便可。
-  ![Cs compiler](https://github.com/HIT-SCIR/ltp-web/blob/master/ltpwebsite/static/img/Cs_complier.jpg)
+  ![Cs compiler](https://github.com/HIT-SCIR/ltp-web/blob/master/ltpwebsite/static/img/Cs_complier.jpg?raw=true)
 
   * 第二步：编译
 
