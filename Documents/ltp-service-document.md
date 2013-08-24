@@ -216,7 +216,7 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 
 | 参数名 | 参数描述 |
 |-------|----------|
-|std::vector<Word> &wordList|分析结果序列，保存在Word类里|
+|std::vector&lt;Word&gt; &wordList|分析结果序列，保存在Word类里|
 |int sentenceIdx|选择提取的句子序号|
 
 返回值：
@@ -258,7 +258,7 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 
 |参数名 | 参数描述 |
 |-------|----------|
-| const vector<Word> &wordList | 插入的组成句子的单词序列。其中note结点是根据第一个sentence第一个词生成的，必须保证后面句子中的词与第一个词一致，否则会抛异常。|
+| const vector&lt;Word&gt; &wordList | 插入的组成句子的单词序列。其中note结点是根据第一个sentence第一个词生成的，必须保证后面句子中的词与第一个词一致，否则会抛异常。|
 |int paragraphId|选择插入句子的段落号|
 
 返回值：
@@ -293,7 +293,7 @@ LTML类提供XML操作方法，包括XML的生成，XML中信息的提取。
 |string GetWSD()|返回词义消歧结果。失败时返回空|
 |int GetParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
 |bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
-|bool GetSRLs (std::vector<SRL> &srls)|如果该词是谓词；返回SRL类型的vector<SRL>|
+|bool GetSRLs (std::vector&lt;SRL&gt; &srls)|如果该词是谓词；返回SRL类型的vector&lt;SRL&gt;|
 
 ###SRL类型
 SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
@@ -540,7 +540,7 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 位于edu.hit.ir.ltpService.LTML
 该类是对返回的数据(xml)进行解析的主要对象。
 
-**ArrayList<Word>  getWords**
+**ArrayList&lt;Word&gt; getWords**
 
 功能：
 
@@ -554,7 +554,7 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 |int sentenceIdx|选择提取的句子序号|
 返回值：
 
-提取的LTML分析结果。
+提取的LTML分析结果，为Word类型。
 
 **String getSentenceContent**
 
@@ -590,7 +590,7 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 
 |参数名 | 参数描述 |
 |-------|----------|
-| ArrayList<Word> wordList | 插入的组成句子的单词序列。其中note结点是根据第一个sentence第一个词生成的，必须保证后面句子中的词与第一个词一致，否则会抛异常。|
+| ArrayList&lt;Word&gt; wordList | 插入的组成句子的单词序列。其中note结点是根据第一个sentence第一个词生成的，必须保证后面句子中的词与第一个词一致，否则会抛异常。|
 |int paragraphId|选择插入句子的段落号|
 
 **void addSentence**
@@ -618,7 +618,7 @@ cp /path1/xxx.jar:/path2/xxx.jar  添加的jar包linux下用用”:”隔开，w
 |String getWSD()|返回词义消歧结果。失败时返回空|
 |int getParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
 |bool isPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
-|ArrayList<SRL> getSRLs ()|如果该词是谓词；返回SRL类型的List|
+|ArrayList&lt;SRL&gt; getSRLs ()|如果该词是谓词；返回SRL类型的List|
 
 ###SRL类型
 SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
@@ -1045,7 +1045,7 @@ C# 接口的操作主要有以下两个类：
 位于名空间ltp_service
 该类是对返回的数据(xml)进行解析的主要对象。
 
-**List<Word> GetWords**
+**List&lt;Word&gt; GetWords**
 
 功能：
 
@@ -1060,7 +1060,7 @@ C# 接口的操作主要有以下两个类：
 
 返回值：
 
-提取的LTML分析结果
+提取的LTML分析结果,为Word类型
 
 **String GetSentenceContent**
 
@@ -1112,7 +1112,7 @@ C# 接口的操作主要有以下两个类：
 
 |参数名 | 参数描述 |
 |-------|----------|
-| List<Word> wordList | 插入的组成句子的单词序列。其中note结点是根据第一个sentence第一个词生成的，必须保证后面句子中的词与第一个词一致，否则会抛异常。|
+| List&lt;Word&gt; wordList | 插入的组成句子的单词序列。其中note结点是根据第一个sentence第一个词生成的，必须保证后面句子中的词与第一个词一致，否则会抛异常。|
 |int paragraphId|选择插入句子的段落号|
 
 **void AddSentence**
@@ -1140,7 +1140,7 @@ C# 接口的操作主要有以下两个类：
 |String GetWSD()|返回词义消歧结果。失败时返回空|
 |int GetParserParent()|返回词义消歧的解释。失败时返回空依存句法分析的父亲结点ID号，结返回结果为一个大于等于-2(>= -2)的整数，失败时返回-3|
 |bool IsPredicate()|检查该词是否是谓词。是返回true，否则返回false。|
-|List<SRL> GetSRLs()|如果该词是谓词；返回SRL类型的List<SRL>|
+|List&lt;SRL&gt; GetSRLs()|如果该词是谓词；返回SRL类型的List&lt;SRL&gt;|
 
 ###SRL类型
 SRL类型是对语义角色标注结果的一种抽象，主要包括语义角色标注类型（结果），开始词的ID号及结束词的ID号
