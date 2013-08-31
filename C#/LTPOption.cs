@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ltp_service
 {
-    class LTPOption
+    public class LTPOption
     {
         public const String WS="ws";
 	    public const String POS="pos";

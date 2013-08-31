@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ltp_service
 {
-    class LTPTag
+    public class LTPTag
     {
         public const String ROOT = "xml4nlp";
 	    public const String DOC = "doc";
