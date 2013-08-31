@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'ltpservice'
 
-client = LTPService.new('username', 'password')
+client = LTPService.new('email', 'token')
 
 ltml = LTML.new
 ltml.build_from_words(['我', '爱', '北京', '天安门'], 'UTF-8')
