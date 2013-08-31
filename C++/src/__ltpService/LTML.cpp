@@ -3,7 +3,10 @@
 namespace ltp {
 namespace service {
 
-LTML::LTML() : XML4NLP() {
+LTML::LTML() : XML4NLP(),
+    encoding("utf-8"),
+    sentenceNumber(0),
+    paragraphNumber(1) {
 }
 
 bool LTML::SetEncoding(const string& encodeType){
@@ -151,6 +154,7 @@ void LTML::AddSentence(const vector<Word> &wordList, int paragraphId) {
         return;
     }
 
+    // the LTML is set over handle.
     if(sentenceNumber == -1) {
         throw "AddSentence error: Had been set over, can not be write again";
     } else if (sentenceNumber == 0) {
@@ -161,7 +165,7 @@ void LTML::AddSentence(const vector<Word> &wordList, int paragraphId) {
 
         vector<Word>::const_iterator iter = wordList.begin();
         SetNote(NOTE_SENT);
-        
+ 
         if (iter->HasWS())      { SetNote(NOTE_WORD); }
         if (iter->HasPOS())     { SetNote(NOTE_POS); }
         if (iter->HasNE())      { SetNote(NOTE_NE);  }
@@ -193,7 +197,7 @@ void LTML::AddSentence(const vector<Word> &wordList, int paragraphId) {
 
     TiXmlElement* paraPtr = m_document_t.paragraphs[paragraphId].paragraphPtr;
     vector<Sentence_t>& sentVec = m_document_t.paragraphs[paragraphId].sentences;
-        
+
     Sentence_t sentEle;
     sentEle.sentencePtr = new TiXmlElement(TAG_SENT);
     string contents = "";

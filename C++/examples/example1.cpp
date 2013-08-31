@@ -1,11 +1,11 @@
 /************************************************************************/
-/*	
-PROGRAM:	example9
-对SERVICE及LTML重新封装后的测试程序
-HISTORY:	2009/12/23	韩中华	FIRST RELEASE
-zhhan@ir.hit.edu.cn
-哈工大信息检索研究中心
-*/
+/*
+ * PROGRAM:	example9
+ * 对SERVICE及LTML重新封装后的测试程序
+ * HISTORY:	2009/12/23	韩中华	FIRST RELEASE
+ * zhhan@ir.hit.edu.cn
+ * 哈工大信息检索研究中心
+ */
 /************************************************************************/
 
 #include "LTPOption.h"
