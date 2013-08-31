@@ -266,6 +266,7 @@ void LTML::AddSentence(const std::string & sentenceContent, int paragraphId) {
 
 bool LTML::SetParagraphNumber(int pid) {
     paragraphNumber = pid;
+	return true;
 }
 
 bool LTML::CheckWordMatch(const Word & w) {

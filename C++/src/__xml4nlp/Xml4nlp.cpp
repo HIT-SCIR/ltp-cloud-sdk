@@ -161,6 +161,8 @@ int XML4NLP::LoadXMLFromString(const char * str) {
 
 int XML4NLP::LoadXMLFromString(const std::string & str) {
     LoadXMLFromString(str.c_str());
+
+	return 0;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////

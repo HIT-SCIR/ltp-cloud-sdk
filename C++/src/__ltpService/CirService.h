@@ -15,9 +15,9 @@
     #define _CIRSERVICE_POSIX_
 #endif
 
-#ifdef _CIRSERVICE_POSIX_
+#if defined(_CIRSERVICE_POSIX_)
     #include <netdb.h>
-#elif _CIRSERVICE_WIN32_
+#else
     #include <Winsock2.h>
     #pragma comment(lib,"WS2_32.Lib")
 #endif
