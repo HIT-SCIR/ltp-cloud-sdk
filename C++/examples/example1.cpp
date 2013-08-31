@@ -1,10 +1,10 @@
 /************************************************************************/
 /*	
 PROGRAM:	example9
-¶ÔSERVICE¼°LTMLÖØĞÂ·â×°ºóµÄ²âÊÔ³ÌĞò
-HISTORY:	2009/12/23	º«ÖĞ»ª	FIRST RELEASE
+å¯¹SERVICEåŠLTMLé‡æ–°å°è£…åçš„æµ‹è¯•ç¨‹åº
+HISTORY:	2009/12/23	éŸ©ä¸­å	FIRST RELEASE
 zhhan@ir.hit.edu.cn
-¹ş¹¤´óĞÅÏ¢¼ìË÷ÑĞ¾¿ÖĞĞÄ
+å“ˆå·¥å¤§ä¿¡æ¯æ£€ç´¢ç ”ç©¶ä¸­å¿ƒ
 */
 /************************************************************************/
 
@@ -21,10 +21,10 @@ int main(){
 
     vector<Word> wordList;
     Word w;
-    w.SetWS("ÎÒ");      w.SetPOS("r");  wordList.push_back(w);
-    w.SetWS("°®");      w.SetPOS("v");  wordList.push_back(w);
-    w.SetWS("±±¾©");    w.SetPOS("ns"); wordList.push_back(w);
-    w.SetWS("Ìì°²ÃÅ");  w.SetPOS("ns"); wordList.push_back(w);
+    w.SetWS("æˆ‘");      w.SetPOS("r");  wordList.push_back(w);
+    w.SetWS("çˆ±");      w.SetPOS("v");  wordList.push_back(w);
+    w.SetWS("åŒ—äº¬");    w.SetPOS("ns"); wordList.push_back(w);
+    w.SetWS("å¤©å®‰é—¨");  w.SetPOS("ns"); wordList.push_back(w);
 
     try{
         ltml.AddSentence(wordList, 0);

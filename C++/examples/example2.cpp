@@ -1,9 +1,9 @@
 /************************************************************************/
 /* PROGRAM: example10
- * ¶ÔSERVICE¼°LTMLÖØÐÂ·â×°ºóµÄ²âÊÔ³ÌÐò
- * HISTORY: 2009/12/24  º«ÖÐ»ª  FIRST RELEASE
+ * å¯¹SERVICEåŠLTMLé‡æ–°å°è£…åŽçš„æµ‹è¯•ç¨‹åº
+ * HISTORY: 2009/12/24  éŸ©ä¸­åŽ  FIRST RELEASE
  * zhhan@ir.hit.edu.cn
- * ¹þ¹¤´óÐÅÏ¢¼ìË÷ÑÐ¾¿ÖÐÐÄ
+ * å“ˆå·¥å¤§ä¿¡æ¯æ£€ç´¢ç ”ç©¶ä¸­å¿ƒ
  */
 /************************************************************************/
 
@@ -18,7 +18,7 @@ int main(){
     LTPService ls("email:token");
     LTML ltml;
 
-    if (!ls.Analyze(LTPOption.ALL,"ÎÒ°®±±¾©Ìì°²ÃÅ¡£", ltml)) {
+    if (!ls.Analyze(LTPOption.ALL,"æˆ‘çˆ±åŒ—äº¬å¤©å®‰é—¨ã€‚", ltml)) {
         cerr<<"Authorization is denied!"<<endl;
         exit(EXIT_FAILURE);
     }

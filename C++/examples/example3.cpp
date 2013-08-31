@@ -1,9 +1,9 @@
 /************************************************************************/
 /* PROGRAM: example11 
- * ��SERVICE��LTML���·�װ��Ĳ��Գ���
- * HISTORY: 2009/1/3    ���л�  FIRST RELEASE
+ * 对SERVICE及LTML重新封装后的测试程序
+ * HISTORY: 2009/1/3    韩中华  FIRST RELEASE
  * zhhan@ir.hit.edu.cn
- * ��������Ϣ�����о�����
+ * 哈工大信息检索研究中心
  */
 /************************************************************************/
 
@@ -20,7 +20,7 @@ int main() {
 
     try{
         if(!ls.Analyze(LTPOption.WS, 
-                    "��ҹ���������Ƕ԰����һ��ڶг�������ǻۡ����߽��ĵ�ڤ�롣", 
+                    "午夜巴塞罗那是对爱情的一次诙谐、充满智慧、独具匠心的冥想。", 
                     ltmlBeg)) {
             cerr<<"Authorization is denied!"<<endl;
             exit(EXIT_FAILURE);
@@ -55,7 +55,7 @@ int main() {
         LTML ltmlOut;
         ls.Analyze(LTPOption.PARSER, ltmlSec, ltmlOut);	
 
-        //����ϲ��ִʺ�PARSER���
+        //输出合并分词后PARSER结果
         cout<<"merge and get parser results."<<endl;
         vector<Word> outList;
         ltmlOut.GetWords(outList,0);
