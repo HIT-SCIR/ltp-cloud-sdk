@@ -1,5 +1,0 @@
-C:\Users\Gema\Documents\GitHub\ltp-cloud-sdk\C#\bin\Debug\ltp-service.exe
-C:\Users\Gema\Documents\GitHub\ltp-cloud-sdk\C#\bin\Debug\ltp-service.pdb
-C:\Users\Gema\Documents\GitHub\ltp-cloud-sdk\C#\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Gema\Documents\GitHub\ltp-cloud-sdk\C#\obj\Debug\ltp-service.exe
-C:\Users\Gema\Documents\GitHub\ltp-cloud-sdk\C#\obj\Debug\ltp-service.pdb
