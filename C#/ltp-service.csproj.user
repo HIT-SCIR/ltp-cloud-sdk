@@ -1,5 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <StartArguments>-xmlmerge cir:lovehitcir all xiaohua.xml xiaohua2.xml xiaohua_merge.xml</StartArguments>
+    <StartArguments>-xmlmerge cir:lovehitcir all xiaohua.xml xiaohua2.xml 
+-xmlmerge cir:lovehitcir all xiaohua.xml xiaohua2.xml</StartArguments>
   </PropertyGroup>
 </Project>
