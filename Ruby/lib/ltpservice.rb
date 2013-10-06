@@ -38,7 +38,11 @@ class LTPService
             end
         end
 
-        LTML.new(res.body)
+        if res.class.name == "HTTPOK"
+            LTML.new(res.body)
+        else
+            "Failed to analysis"
+        end
     end
 end
 
