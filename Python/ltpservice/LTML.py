@@ -163,6 +163,52 @@ class LTML(object):
         else:
             return [r.encode(encoding) for r in ret]
 
+    # 
+    # Maintain a list of pos
+    #
+    #   @param[in]  pid         the index of paragraph
+    #   @param[in]  sid         the index of sentence
+    #   @param[in]  encoding    the encoding
+    #   @return     list(str)   list of pos
+    def get_pos(self, pid, sid, encoding=None):
+        ret = [e.get('pos') for e in self.dom[1][pid][sid].findall('word')]
+
+        if encoding is None:
+            return ret
+        else:
+            return [r.encode(encoding) for r in ret]
+
+    # 
+    # Maintain a list of parents
+    #
+    #   @param[in]  pid         the index of paragraph
+    #   @param[in]  sid         the index of sentence
+    #   @param[in]  encoding    the encoding
+    #   @return     list(str)   list of parents for each word
+    def get_parents(self, pid, sid, encoding=None):
+        ret = [e.get('parent') for e in self.dom[1][pid][sid].findall('word')]
+
+        if encoding is None:
+            return ret
+        else:
+            return [r.encode(encoding) for r in ret]
+
+    # 
+    # Maintain a list of relations
+    #
+    #   @param[in]  pid         the index of paragraph
+    #   @param[in]  sid         the index of sentence
+    #   @param[in]  encoding    the encoding
+    #   @return     list(str)   list of relation between a word and its parent
+    def get_relations(self, pid, sid, encoding=None):
+        ret = [e.get('relate') for e in self.dom[1][pid][sid].findall('word')]
+
+        if encoding is None:
+            return ret
+        else:
+            return [r.encode(encoding) for r in ret]
+
+
     #
     # maintain the sentence string
     #
