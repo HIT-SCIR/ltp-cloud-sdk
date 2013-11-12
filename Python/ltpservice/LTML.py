@@ -59,14 +59,10 @@ class LTML(object):
         self.doc     = SubElement(self.xml4nlp, 'doc')
 
         para    = SubElement(self.doc, 'para')
-        sent    = SubElement(para, 'sent')
-
         para.set("id", "0")
-        sent.set("id", "0")
-        sent.set("cont", buffer)
+        para.text = buffer.decode(encoding)
 
         self._clean_note()
-
         self.dom = self.xml4nlp
 
     # 
