@@ -38,7 +38,7 @@ class LTPService
             end
         end
 
-        if res.class.name == "HTTPOK"
+        if res.class.name ==  "Net::HTTPOK"
             LTML.new(res.body)
         else
             "Failed to analysis"
