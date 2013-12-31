@@ -1,4 +1,3 @@
-require("./util.js");
 var http = require("http");
 var parseString = require("xml2js").parseString;
 
