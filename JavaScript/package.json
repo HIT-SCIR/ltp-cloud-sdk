@@ -1,0 +1,23 @@
+{
+  "name": "ltp-cloud-sdk",
+  "version": "0.0.1",
+  "description": "JavaScript SDK for ltp platform.",
+  "main": "ltp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ltp",
+    "sdk",
+    "js"
+  ],
+  "dependencies": {
+    "xml2js": "0.4.0"
+  },
+  "author": {
+    "name": "Zhe Chen",
+    "email": "<chenzhekl@gmail.com>",
+    "url": "http://chenzhekl.me"
+  },
+  "license": "Apache-2.0"
+}
